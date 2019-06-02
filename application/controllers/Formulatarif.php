@@ -31,13 +31,8 @@ class Formulatarif extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'tarif' => 'required',
 		]);
-
-		if (FormulaTarif_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Formula Tarif sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -76,13 +71,8 @@ class Formulatarif extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'tarif' => 'required',
 		]);
-
-		if ($requestData['kode'] != $formulatarif->kode && FormulaTarif_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Formula Tarif sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());

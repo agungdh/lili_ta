@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Sun, 02 Jun 2019 04:45:27 +0200
+-- Date: Sun, 02 Jun 2019 05:01:50 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,11 +24,9 @@
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `formula_tarif` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(191) NOT NULL,
   `tarif` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +36,7 @@ CREATE TABLE `formula_tarif` (
 LOCK TABLES `formula_tarif` WRITE;
 /*!40000 ALTER TABLE `formula_tarif` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `formula_tarif` VALUES (1,'15067',70000),(2,'15068',95000),(3,'15066',55000),(4,'15063',65000);
+INSERT INTO `formula_tarif` VALUES (1,70000),(2,95000),(3,55000),(4,65000);
 /*!40000 ALTER TABLE `formula_tarif` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -91,11 +89,9 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `loket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(191) NOT NULL,
   `lokasi` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +101,7 @@ CREATE TABLE `loket` (
 LOCK TABLES `loket` WRITE;
 /*!40000 ALTER TABLE `loket` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `loket` VALUES (1,'1500010','Loket Depan (2)'),(2,'150009','Loket Depan (1)');
+INSERT INTO `loket` VALUES (1,'Loket Depan (2)'),(2,'Loket Depan (1)');
 /*!40000 ALTER TABLE `loket` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -121,11 +117,9 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pemilik_kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `kode` varchar(191) NOT NULL,
   `nama` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kode` (`kode`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +129,7 @@ CREATE TABLE `pemilik_kendaraan` (
 LOCK TABLES `pemilik_kendaraan` WRITE;
 /*!40000 ALTER TABLE `pemilik_kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `pemilik_kendaraan` VALUES (1,'15002010','PT PUTRA KARO MANDIRI'),(2,'15002022','PT. PUTRA KARONA MANDIRI'),(3,'15002178','PT KURNIAWAN SIDIQ TRANS EX PUTRI'),(4,'15002995','TAXI PERORANGAN'),(5,'15002997','NON BUS PEDESAAN (KAT 2. CBG)');
+INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI'),(2,'PT. PUTRA KARONA MANDIRI'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI'),(4,'TAXI PERORANGAN'),(5,'NON BUS PEDESAAN (KAT 2. CBG)');
 /*!40000 ALTER TABLE `pemilik_kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -152,4 +146,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sun, 02 Jun 2019 04:45:27 +0200
+-- Dump completed on: Sun, 02 Jun 2019 05:01:50 +0200

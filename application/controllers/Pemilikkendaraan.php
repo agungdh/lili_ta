@@ -31,13 +31,8 @@ class Pemilikkendaraan extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'nama' => 'required',
 		]);
-
-		if (PemilikKendaraan_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Pemilik Kendaraan sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -74,13 +69,8 @@ class Pemilikkendaraan extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'nama' => 'required',
 		]);
-
-		if ($requestData['kode'] != $pemilikkendaraan->kode && PemilikKendaraan_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Pemilik Kendaraan sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());

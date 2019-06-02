@@ -31,13 +31,8 @@ class Loket extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'lokasi' => 'required',
 		]);
-
-		if (Loket_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Loket sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -74,13 +69,8 @@ class Loket extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'kode' => 'required',
 			'lokasi' => 'required',
 		]);
-
-		if ($requestData['kode'] != $loket->kode && Loket_model::where(['kode' => $requestData['kode']])->first()) {
-			$validator->errors()->add('kode', 'Kode Loket sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());

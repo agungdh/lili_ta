@@ -23,15 +23,13 @@ Formula Tarif
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
 	                <tr>
-                    <th>Kode</th>
-                    <th>Tarif</th>
+                      <th>Tarif</th>
 	                  <th>Proses</th>
 	                </tr>
                 </thead>
                 <tbody>
                 	@foreach($formulatarifs as $item)
                 	<tr>
-                		<td>{{$item->kode}}</td>
                     <td>{{helper()->rupiah($item->tarif)}}</td>
                 		
                 		<td>

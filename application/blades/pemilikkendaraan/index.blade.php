@@ -22,8 +22,7 @@ Pemilik Kendaraan
                 </a><br><br>
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
-	                <tr>
-                    <th>Kode</th>
+	                <tr>   
                     <th>Nama</th>
 	                  <th>Proses</th>
 	                </tr>
@@ -31,7 +30,6 @@ Pemilik Kendaraan
                 <tbody>
                 	@foreach($pemilikkendaraans as $item)
                 	<tr>
-                		<td>{{$item->kode}}</td>
                     <td>{{$item->nama}}</td>
                 		
                 		<td>

@@ -1,0 +1,8 @@
+
+\.env
+
+application/cache/blade/
+
+application/sessions/
+
+vendor/

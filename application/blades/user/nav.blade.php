@@ -1,0 +1,1 @@
+<li><a href="{{ base_url() }}user"><i class="fa fa-home"></i> User</a></li>

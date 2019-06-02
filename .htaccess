@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+Options -Indexes
+
+<Files ~ "\.(env|json|config.js|md|gitignore|gitattributes|lock|sql)$">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "arisan">  
+  Order Allow,Deny
+  Deny from all
+</Files>

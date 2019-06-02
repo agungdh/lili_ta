@@ -11,8 +11,8 @@
 
 	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['kode']) {
 		$value = ci()->session->flashdata('old')['kode'];
-	} elseif (isset($loket) && $loket['kode']) {
-		$value = $loket['kode'];
+	} elseif (isset($kendaraan) && $kendaraan['kode']) {
+		$value = $kendaraan['kode'];
 	} else {
 		$value = '';
 	}
@@ -35,8 +35,8 @@
 
 	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['lokasi']) {
 		$value = ci()->session->flashdata('old')['lokasi'];
-	} elseif (isset($loket) && $loket['lokasi']) {
-		$value = $loket['lokasi'];
+	} elseif (isset($kendaraan) && $kendaraan['lokasi']) {
+		$value = $kendaraan['lokasi'];
 	} else {
 		$value = '';
 	}

@@ -1,50 +1,132 @@
 <div class="box-body">
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('kode')) {
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_pemilik_kendaraan')) {
 		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('kode');
+		$message = ci()->session->flashdata('errors')->first('id_pemilik_kendaraan');
 	} else {
 		$class = 'form-group has-feedback';
 		$message = '';
 	}
 
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['kode']) {
-		$value = ci()->session->flashdata('old')['kode'];
-	} elseif (isset($kendaraan) && $kendaraan['kode']) {
-		$value = $kendaraan['kode'];
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_pemilik_kendaraan']) {
+		$value = ci()->session->flashdata('old')['id_pemilik_kendaraan'];
+	} elseif (isset($kendaraan) && $kendaraan['id_pemilik_kendaraan']) {
+		$value = $kendaraan['id_pemilik_kendaraan'];
 	} else {
 		$value = '';
 	}
 	@endphp
 	<div class="{{$class}}">
-		<label for="kode" data-toggle="tooltip" title="{{$message}}">Kode</label>
+		<label for="id_pemilik_kendaraan" data-toggle="tooltip" title="{{$message}}">Pemilik Kendaraan</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="kode" class="form-control" placeholder="Isi Kode" id="kode" value="{{$value}}">
+			<select class="form-control select2" name="id_pemilik_kendaraan">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Pemilik Kendaraan</option>
+				@foreach($pemilikKendaraans as $item)
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->nama}}</option>
+				@endforeach
+			</select>
 		</div>
 	</div>
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('lokasi')) {
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_formula_tarif')) {
 		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('lokasi');
+		$message = ci()->session->flashdata('errors')->first('id_formula_tarif');
 	} else {
 		$class = 'form-group has-feedback';
 		$message = '';
 	}
 
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['lokasi']) {
-		$value = ci()->session->flashdata('old')['lokasi'];
-	} elseif (isset($kendaraan) && $kendaraan['lokasi']) {
-		$value = $kendaraan['lokasi'];
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_formula_tarif']) {
+		$value = ci()->session->flashdata('old')['id_formula_tarif'];
+	} elseif (isset($kendaraan) && $kendaraan['id_formula_tarif']) {
+		$value = $kendaraan['id_formula_tarif'];
 	} else {
 		$value = '';
 	}
 	@endphp
 	<div class="{{$class}}">
-		<label for="lokasi" data-toggle="tooltip" title="{{$message}}">Lokasi</label>
+		<label for="id_formula_tarif" data-toggle="tooltip" title="{{$message}}">Formula Tarif</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="lokasi" class="form-control" placeholder="Isi Lokasi" id="lokasi" value="{{$value}}">
+			<select class="form-control select2" name="id_formula_tarif">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Formula Tarif</option>
+				@foreach($formulaTarifs as $item)
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{helper()->rupiah($item->tarif)}}</option>
+				@endforeach
+			</select>
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nomor_polisi')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('nomor_polisi');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['nomor_polisi']) {
+		$value = ci()->session->flashdata('old')['nomor_polisi'];
+	} elseif (isset($kendaraan) && $kendaraan['nomor_polisi']) {
+		$value = $kendaraan['nomor_polisi'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="nomor_polisi" data-toggle="tooltip" title="{{$message}}">Nomor Polisi</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="nomor_polisi" class="form-control" placeholder="Isi Nomor Polisi" id="nomor_polisi" value="{{$value}}">
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('seat_aktif')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('seat_aktif');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['seat_aktif']) {
+		$value = ci()->session->flashdata('old')['seat_aktif'];
+	} elseif (isset($kendaraan) && $kendaraan['seat_aktif']) {
+		$value = $kendaraan['seat_aktif'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="seat_aktif" data-toggle="tooltip" title="{{$message}}">Seat Aktif</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="seat_aktif" class="form-control" placeholder="Isi Seat Aktif" id="seat_aktif" value="{{$value}}">
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('jumlah_seat')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('jumlah_seat');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['jumlah_seat']) {
+		$value = ci()->session->flashdata('old')['jumlah_seat'];
+	} elseif (isset($kendaraan) && $kendaraan['jumlah_seat']) {
+		$value = $kendaraan['jumlah_seat'];
+	} else {
+		$value = '';
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="jumlah_seat" data-toggle="tooltip" title="{{$message}}">Jumlah Seat</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="jumlah_seat" class="form-control" placeholder="Isi Jumlah Seat" id="jumlah_seat" value="{{$value}}">
 		</div>
 	</div>
 	

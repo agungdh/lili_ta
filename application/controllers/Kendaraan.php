@@ -50,9 +50,14 @@ class Kendaraan extends CI_Controller {
 			'id_pemilik_kendaraan' => 'required',
 			'id_formula_tarif' => 'required',
 			'nomor_polisi' => 'required',
-			'seat_aktif' => 'required|numeric|min:1',
+			'seat_aktif' => 'required|numeric|min:1|lte:jumlah_seat',
 			'jumlah_seat' => 'required|numeric|min:1',
-		]);
+		], [
+			'lte' => [
+				'numeric' => 'The :attribute must be less than or equal :value.',
+			],
+		]
+		);
 
 		if (Kendaraan_model::where(['nomor_polisi' => $requestData['nomor_polisi']])->first()) {
 			$validator->errors()->add('nomor_polisi', 'Nomor Polisi sudah ada !!!');
@@ -98,9 +103,14 @@ class Kendaraan extends CI_Controller {
 			'id_pemilik_kendaraan' => 'required',
 			'id_formula_tarif' => 'required',
 			'nomor_polisi' => 'required',
-			'seat_aktif' => 'required|numeric|min:1',
+			'seat_aktif' => 'required|numeric|min:1|lte:jumlah_seat',
 			'jumlah_seat' => 'required|numeric|min:1',
-		]);
+		], [
+			'lte' => [
+				'numeric' => 'The :attribute must be less than or equal :value.',
+			],
+		]
+		);
 
 		if ($requestData['nomor_polisi'] != $kendaraan->nomor_polisi && Kendaraan_model::where(['nomor_polisi' => $requestData['nomor_polisi']])->first()) {
 			$validator->errors()->add('nomor_polisi', 'Nomor Polisi sudah ada !!!');

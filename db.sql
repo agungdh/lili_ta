@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Sat, 15 Jun 2019 09:36:30 +0200
+-- Date: Sat, 15 Jun 2019 09:49:32 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,13 +57,15 @@ CREATE TABLE `kendaraan` (
   `nomor_polisi` varchar(191) NOT NULL,
   `seat_aktif` int(11) NOT NULL,
   `jumlah_seat` int(11) NOT NULL,
+  `mulai_penagihan_bulan` int(11) NOT NULL,
+  `mulai_penagihan_tahun` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nomor_polisi` (`nomor_polisi`),
   KEY `id_formula_tarif` (`id_formula_tarif`),
   KEY `id_pemilik_kendaraan` (`id_pemilik_kendaraan`),
   CONSTRAINT `kendaraan_ibfk_1` FOREIGN KEY (`id_formula_tarif`) REFERENCES `formula_tarif` (`id`),
   CONSTRAINT `kendaraan_ibfk_2` FOREIGN KEY (`id_pemilik_kendaraan`) REFERENCES `pemilik_kendaraan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,12 +75,12 @@ CREATE TABLE `kendaraan` (
 LOCK TABLES `kendaraan` WRITE;
 /*!40000 ALTER TABLE `kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `kendaraan` VALUES (1,1,1,'BE 2032 JC',28,28),(2,1,3,'BE 7365 CU',18,18);
+INSERT INTO `kendaraan` VALUES (3,2,2,'BE 1337 EE',12,12,12,2020);
 /*!40000 ALTER TABLE `kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `kendaraan` with 2 row(s)
+-- Dumped table `kendaraan` with 1 row(s)
 --
 
 --
@@ -101,7 +103,7 @@ CREATE TABLE `konfigurasi` (
 LOCK TABLES `konfigurasi` WRITE;
 /*!40000 ALTER TABLE `konfigurasi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `konfigurasi` VALUES ('APP_TITLE','APP NOTIF'),('APP_TITLE_SHORT','APNT'),('APP_TITLE_SHORTER','AN'),('DEFAULT_KENDARAAN_MULAI_PENAGIHAN_BULAN','12'),('DEFAULT_KENDARAAN_MULAI_PENAGIHAN_TAHUN','2019'),('ZENZIVA_API_PASS','1234'),('ZENZIVA_API_USER','8es5nr');
+INSERT INTO `konfigurasi` VALUES ('APP_TITLE','APP NOTIF'),('APP_TITLE_SHORT','APNT'),('APP_TITLE_SHORTER','AN'),('DEFAULT_KENDARAAN_MULAI_PENAGIHAN_BULAN','6'),('DEFAULT_KENDARAAN_MULAI_PENAGIHAN_TAHUN','2019'),('ZENZIVA_API_PASS','1234'),('ZENZIVA_API_USER','8es5nr');
 /*!40000 ALTER TABLE `konfigurasi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -174,4 +176,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 15 Jun 2019 09:36:31 +0200
+-- Dump completed on: Sat, 15 Jun 2019 09:49:32 +0200

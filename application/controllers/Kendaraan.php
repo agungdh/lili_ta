@@ -52,6 +52,8 @@ class Kendaraan extends CI_Controller {
 			'nomor_polisi' => 'required',
 			'seat_aktif' => 'required|numeric|min:1|lte:jumlah_seat',
 			'jumlah_seat' => 'required|numeric|min:1',
+			'mulai_penagihan_bulan' => 'required|numeric|min:1|max:12',
+			'mulai_penagihan_tahun' => 'required|numeric|min:1900|max:2900',
 		], [
 			'lte' => [
 				'numeric' => 'The :attribute must be less than or equal :value.',
@@ -105,6 +107,8 @@ class Kendaraan extends CI_Controller {
 			'nomor_polisi' => 'required',
 			'seat_aktif' => 'required|numeric|min:1|lte:jumlah_seat',
 			'jumlah_seat' => 'required|numeric|min:1',
+			'mulai_penagihan_bulan' => 'required|numeric|min:1|max:12',
+			'mulai_penagihan_tahun' => 'required|numeric|min:1900|max:2900',
 		], [
 			'lte' => [
 				'numeric' => 'The :attribute must be less than or equal :value.',

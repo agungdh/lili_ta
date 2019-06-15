@@ -1,3 +1,7 @@
+@php
+$config = helper()->getKonfigurasi();
+@endphp
+
 <div class="box-body">
 
 	@php
@@ -127,6 +131,54 @@
 		<label for="jumlah_seat" data-toggle="tooltip" title="{{$message}}">Jumlah Seat</label>
 		<div data-toggle="tooltip" title="{{$message}}">
 			<input type="text" name="jumlah_seat" class="form-control" placeholder="Isi Jumlah Seat" id="jumlah_seat" value="{{$value}}">
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('mulai_penagihan_bulan')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('mulai_penagihan_bulan');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['mulai_penagihan_bulan']) {
+		$value = ci()->session->flashdata('old')['mulai_penagihan_bulan'];
+	} elseif (isset($kendaraan) && $kendaraan['mulai_penagihan_bulan']) {
+		$value = $kendaraan['mulai_penagihan_bulan'];
+	} else {
+		$value = $config['DEFAULT_KENDARAAN_MULAI_PENAGIHAN_BULAN'];
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="mulai_penagihan_bulan" data-toggle="tooltip" title="{{$message}}">Mulai Penagihan Bulan</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="mulai_penagihan_bulan" class="form-control" placeholder="Isi Mulai Penagihan Bulan" id="mulai_penagihan_bulan" value="{{$value}}">
+		</div>
+	</div>
+
+	@php
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('mulai_penagihan_tahun')) {
+		$class = 'form-group has-feedback has-error';
+		$message = ci()->session->flashdata('errors')->first('mulai_penagihan_tahun');
+	} else {
+		$class = 'form-group has-feedback';
+		$message = '';
+	}
+
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['mulai_penagihan_tahun']) {
+		$value = ci()->session->flashdata('old')['mulai_penagihan_tahun'];
+	} elseif (isset($kendaraan) && $kendaraan['mulai_penagihan_tahun']) {
+		$value = $kendaraan['mulai_penagihan_tahun'];
+	} else {
+		$value = $config['DEFAULT_KENDARAAN_MULAI_PENAGIHAN_TAHUN'];
+	}
+	@endphp
+	<div class="{{$class}}">
+		<label for="mulai_penagihan_tahun" data-toggle="tooltip" title="{{$message}}">Mulai Penagihan Tahun</label>
+		<div data-toggle="tooltip" title="{{$message}}">
+			<input type="text" name="mulai_penagihan_tahun" class="form-control" placeholder="Isi Mulai Penagihan Tahun" id="mulai_penagihan_tahun" value="{{$value}}">
 		</div>
 	</div>
 	

@@ -9,16 +9,31 @@ use application\eloquents\Absensi as Absensi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+
+	public static function getKonfigurasi()
+	{
+		$temp = DB::table('konfigurasi')->get();
+
+		$newVar = [];
+		foreach ($temp as $item) {
+			$newVar[$item->konfigurasi] = $item->value;
+		}
+
+		return $newVar;
+	}
+
 	public static function cekKuotaSms()
 	{
+		$config = helper()->getKonfigurasi();
+
 		return json_decode(
 			json_encode(
 				simplexml_load_string(
 					file_get_contents(
 						"http://reguler.zenziva.net/apps/smsapibalance.php?userkey="
-						. env('ZENZIVA_API_USER') 
+						. $config['ZENZIVA_API_USER'] 
 						. "&passkey=" 
-						. env('ZENZIVA_API_PASS')
+						. $config['ZENZIVA_API_PASS']
 					)
 				)
 			)

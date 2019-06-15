@@ -21,3 +21,9 @@
     <i class="fa fa-address-book"></i> <span>Kendaraan</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}konfigurasi">
+    <i class="fa fa-address-book"></i> <span>Konfigurasi</span>
+  </a>
+</li>

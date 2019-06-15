@@ -1,4 +1,6 @@
 @php
+$config = helper()->getKonfigurasi();
+
 if(ci()->session->login) {
   // $userData = getUserData();
 }
@@ -9,7 +11,7 @@ if(ci()->session->login) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{getenv('APP_TITLE')}}</title>
+  <title>{{$config['APP_TITLE']}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -86,9 +88,9 @@ if(ci()->session->login) {
     <!-- Logo -->
     <a href="{{ base_url() }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>{{getenv('APP_TITLE_SHORTER')}}</b></span>
+      <span class="logo-mini"><b>{{$config['APP_TITLE_SHORTER']}}</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>{{getenv('APP_TITLE_SHORT')}}</b></span>
+      <span class="logo-lg"><b>{{$config['APP_TITLE_SHORT']}}</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -175,7 +177,7 @@ if(ci()->session->login) {
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y') }} <a href="{{base_url()}}">{{getenv('APP_TITLE_SHORT')}}</a>.</strong> All rights
+    <strong>Copyright &copy; {{ date('Y') }} <a href="{{base_url()}}">{{$config['APP_TITLE_SHORT']}}</a>.</strong> All rights
     reserved.
   </footer>
 </div>

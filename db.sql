@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 17 Jun 2019 10:13:28 +0200
+-- Date: Mon, 17 Jun 2019 10:18:45 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -51,13 +51,11 @@ COMMIT;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `karyawan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nik` varchar(191) NOT NULL,
   `nama` varchar(191) NOT NULL,
   `jabatan` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nik` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`nik`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +65,7 @@ CREATE TABLE `karyawan` (
 LOCK TABLES `karyawan` WRITE;
 /*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `karyawan` VALUES (4,'1234','Tukang nginput data','admin input'),(5,'1432','gak tau apa','admin gak tau'),(6,'masgas da','mboh opo iki','asfasf'),(7,'12345678','Boss','Boss');
+INSERT INTO `karyawan` VALUES ('1234','Tukang nginput data','admin input'),('12345678','Boss','Boss'),('1432','gak tau apa','admin gak tau'),('masgas da','mboh opo iki','asfasf');
 /*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -208,7 +206,7 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transaksi` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_karyawan` int(11) NOT NULL,
+  `nik` varchar(191) NOT NULL,
   `id_kendaraan` int(11) NOT NULL,
   `id_loket` int(11) NOT NULL,
   `tanggal` date NOT NULL,
@@ -217,10 +215,10 @@ CREATE TABLE `transaksi` (
   PRIMARY KEY (`id`),
   KEY `id_kendaraan` (`id_kendaraan`),
   KEY `id_loket` (`id_loket`),
-  KEY `id_karyawan` (`id_karyawan`),
+  KEY `nik` (`nik`),
   CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_kendaraan`) REFERENCES `kendaraan` (`id`),
   CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_loket`) REFERENCES `loket` (`id`),
-  CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id`)
+  CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -262,7 +260,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (5,'12345678','$2y$10$wGLW4fNiEeQRA0sBjaWdj.44LRLaDNmbszvSrm15ovRdV7VKXmbFm','b');
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$XzHJeKzeIFa/o3mfAPtJr.OoN8s09JFnDMARimUgVUznfzXj7Xu/u','b');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -279,4 +277,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 17 Jun 2019 10:13:28 +0200
+-- Dump completed on: Mon, 17 Jun 2019 10:18:45 +0200

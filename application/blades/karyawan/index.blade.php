@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Pegawai
+Karyawan
 @endsection
 
 @section('nav')
-@include('pegawai.nav')
+@include('karyawan.nav')
 @endsection
 
 @section('content')
@@ -13,35 +13,31 @@ Pegawai
 	<div class="col-md-12">
 		<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Data Pegawai</h3>
+              <h3 class="box-title">Data Karyawan</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<a class="btn btn-success btn-sm" href="{{base_url()}}pegawai/tambah">
+            	<a class="btn btn-success btn-sm" href="{{base_url()}}karyawan/tambah">
                   <i class="glyphicon glyphicon-plus"></i> Tambah
                 </a><br><br>
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
 	                <tr>
-	                  <th>NIP</th>
+                      <th>NIK</th>
                       <th>Nama</th>
-                      <th>Golongan/Pangkat</th>
-                      <th>Eselon</th>
                       <th>Jabatan</th>
 	                  <th>Proses</th>
 	                </tr>
                 </thead>
                 <tbody>
-                	@foreach($pegawais as $item)
+                	@foreach($karyawans as $item)
                 	<tr>
-                		<td>{{$item->nip}}</td>
+                        <td>{{$item->nik}}</td>
                         <td>{{$item->nama}}</td>
-                        <td>{{$item->golongan->golongan}}/{{$item->golongan->ruang}} {{$item->golongan->pangkat}}</td>
-                        <td>{{$item->eselon ? $item->eselon->eselon : '-'}}</td>
                         <td>{{$item->jabatan}}</td>
                 		
                 		<td>
-                        <a class="btn btn-primary btn-sm" href="{{base_url()}}pegawai/ubah/{{$item->id}}">
+                        <a class="btn btn-primary btn-sm" href="{{base_url()}}karyawan/ubah/{{$item->id}}">
     	                  <i class="glyphicon glyphicon-pencil"></i> Ubah
     	                </a>
 
@@ -69,7 +65,7 @@ function hapus(id) {
 	  confirmButtonColor: "#DD6B55",
 	  confirmButtonText: "Hapus",
 	}, function(){
-	  window.location = "{{base_url()}}pegawai/aksihapus/" + id;
+	  window.location = "{{base_url()}}karyawan/aksihapus/" + id;
 	});
 }
 </script>

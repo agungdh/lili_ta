@@ -22,9 +22,9 @@ Profil
 
 					<div class="col-md-6">
 						<div class="form-group has-feedback">
-							<label>Pegawai</label>
+							<label>Karyawan</label>
 							<div>
-								<input type="text" disabled class="form-control" value="{{$user->pegawai->nip}} - {{$user->pegawai->nama}}">
+								<input type="text" disabled class="form-control" value="{{$user->karyawan->nik}} - {{$user->karyawan->nama}}">
 							</div>
 						</div>
 					</div>
@@ -33,25 +33,7 @@ Profil
 						<div class="form-group has-feedback">
 							<label>Level</label>
 							<div>
-								<input type="text" disabled class="form-control" value="{{$user->level == 'a' ? 'Admin' : 'Pegawai'}}">
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group has-feedback">
-							<label>Golongan/Pangkat</label>
-							<div>
-								<input type="text" disabled class="form-control" value="{{$user->pegawai->golongan->golongan}}/{{$user->pegawai->golongan->ruang}} {{$user->pegawai->golongan->pangkat}}">
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="form-group has-feedback">
-							<label>Eselon</label>
-							<div>
-								<input type="text" disabled class="form-control" value="{{$user->pegawai->eselon ? $user->pegawai->eselon->eselon : '-'}}">
+								<input type="text" disabled class="form-control" value="{{$user->level == 'b' ? 'Boss' : 'Operator'}}">
 							</div>
 						</div>
 					</div>

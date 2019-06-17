@@ -9,7 +9,7 @@ class Profil extends CI_Controller {
 	{
 		parent::__construct();
 
-		helper()->auth(['a', 'p']);
+		// helper()->auth(['a', 'p']);
 	}
 	
 	public function index()

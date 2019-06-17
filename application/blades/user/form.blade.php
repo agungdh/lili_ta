@@ -1,29 +1,29 @@
 <div class="box-body">
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_pegawai')) {
+	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nik')) {
 		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('id_pegawai');
+		$message = ci()->session->flashdata('errors')->first('nik');
 	} else {
 		$class = 'form-group has-feedback';
 		$message = '';
 	}
 
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_pegawai']) {
-		$value = ci()->session->flashdata('old')['id_pegawai'];
-	} elseif (isset($user) && $user['id_pegawai']) {
-		$value = $user['id_pegawai'];
+	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['nik']) {
+		$value = ci()->session->flashdata('old')['nik'];
+	} elseif (isset($user) && $user['nik']) {
+		$value = $user['nik'];
 	} else {
 		$value = '';
 	}
 	@endphp
 	<div class="{{$class}}">
-		<label for="id_pegawai" data-toggle="tooltip" title="{{$message}}">Pegawai</label>
+		<label for="nik" data-toggle="tooltip" title="{{$message}}">Karyawan</label>
 		<div data-toggle="tooltip" title="{{$message}}">
-			<select class="form-control select2" name="id_pegawai">
-				<option {{$value == '' ? 'selected' : null}} value="">Pilih Pegawai</option>
-				@foreach($pegawais as $item)
-				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->nip}} - {{$item->nama}}</option>
+			<select class="form-control select2" name="nik">
+				<option {{$value == '' ? 'selected' : null}} value="">Pilih Karyawan</option>
+				@foreach($karyawans as $item)
+				<option {{$value == $item->nik ? 'selected' : null}} value="{{$item->nik}}">{{$item->nik}} - {{$item->nama}} - {{$item->jabatan}}</option>
 				@endforeach
 			</select>
 		</div>

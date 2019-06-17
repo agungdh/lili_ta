@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
-use application\eloquents\PemilikKendaraan as PemilikKendaraan_model;
+use application\eloquents\Transaksi as Transaksi_model;
 
-class Pemilikkendaraan extends CI_Controller {
+class Transaksi extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -16,14 +16,14 @@ class Pemilikkendaraan extends CI_Controller {
 
 	public function index()
 	{
-		$pemilikkendaraans = PemilikKendaraan_model::all();
+		$transaksis = Loket_model::all();
 		
-		return blade('pemilikkendaraan.index', compact(['pemilikkendaraans']));
+		return blade('transaksi.index', compact(['transaksis']));
 	}
 
 	public function tambah()
 	{
-		return blade('pemilikkendaraan.tambah');
+		return blade('transaksi.tambah');
 	}
 
 	public function aksitambah()
@@ -31,22 +31,17 @@ class Pemilikkendaraan extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nama' => 'required',
-			'nohp' => 'required|numeric',
+			'lokasi' => 'required',
 		]);
-
-		if (PemilikKendaraan_model::where(['nohp' => $requestData['nohp']])->first()) {
-			$validator->errors()->add('nohp', 'No HP sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('pemilikkendaraan/tambah'));
+			redirect(base_url('transaksi/tambah'));
 		}
 
-		PemilikKendaraan_model::insert($requestData);
+		Loket_model::insert($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -57,39 +52,34 @@ class Pemilikkendaraan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('pemilikkendaraan'));
+		redirect(base_url('transaksi'));
 	}
 
 	public function ubah($id)
 	{
-		$pemilikkendaraan = PemilikKendaraan_model::find($id);
+		$loket = Loket_model::find($id);
 
-		return blade('pemilikkendaraan.ubah', compact(['pemilikkendaraan']));
+		return blade('transaksi.ubah', compact(['loket']));
 	}
 
 	public function aksiubah($id)
 	{
-		$pemilikkendaraan = PemilikKendaraan_model::find($id);
+		$loket = Loket_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'nama' => 'required',
-			'nohp' => 'required|numeric',
+			'lokasi' => 'required',
 		]);
-
-		if ($requestData['nohp'] != $pemilikkendaraan->nohp && PemilikKendaraan_model::where(['nohp' => $requestData['nohp']])->first()) {
-			$validator->errors()->add('nohp', 'No HP sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
 			
-			redirect(base_url('pemilikkendaraan/ubah/' . $id));
+			redirect(base_url('transaksi/ubah/' . $id));
 		}
 
-		PemilikKendaraan_model::where('id', $id)->update($requestData);
+		Loket_model::where('id', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -100,13 +90,13 @@ class Pemilikkendaraan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('pemilikkendaraan'));
+		redirect(base_url('transaksi'));
 	}
 
 	public function aksihapus($id)
 	{
 		try {
-			PemilikKendaraan_model::where('id', $id)->delete();
+			Loket_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',
@@ -116,7 +106,7 @@ class Pemilikkendaraan extends CI_Controller {
                 'class' => 'error',
 			]);
 
-			redirect(base_url('pemilikkendaraan'));
+			redirect(base_url('transaksi'));
         }
 
 		$this->session->set_flashdata(
@@ -128,6 +118,6 @@ class Pemilikkendaraan extends CI_Controller {
 			]
 		);
 
-		redirect(base_url('pemilikkendaraan'));
+		redirect(base_url('transaksi'));
 	}
 }

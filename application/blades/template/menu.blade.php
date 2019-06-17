@@ -33,3 +33,15 @@
     <i class="fa fa-address-book"></i> <span>Konfigurasi</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}transaksi">
+    <i class="fa fa-address-book"></i> <span>Transaksi</span>
+  </a>
+</li>
+
+<li>
+  <a href="{{ base_url() }}user">
+    <i class="fa fa-address-book"></i> <span>User</span>
+  </a>
+</li>

@@ -5,28 +5,28 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
 use application\eloquents\User as User_model;
-use application\eloquents\Pegawai as Pegawai_model;
+use application\eloquents\Karyawan as Karyawan_model;
 
 class User extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
 
-		helper()->auth(['a']);
+		// helper()->auth(['a']);
 	}
 
 	public function index()
 	{
-		$users = User_model::with('pegawai')->get();
+		$users = User_model::with('karyawan')->get();
 
 		return blade('user.index', compact(['users']));
 	}
 
 	public function tambah()
 	{
-		$pegawais = Pegawai_model::all();
+		$karyawans = Karyawan_model::all();
 
-		return blade('user.tambah', compact(['pegawais']));
+		return blade('user.tambah', compact(['karyawans']));
 	}
 
 	public function aksitambah()

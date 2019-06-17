@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 17 Jun 2019 09:32:30 +0200
+-- Date: Mon, 17 Jun 2019 10:02:44 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -179,8 +179,10 @@ COMMIT;
 CREATE TABLE `pemilik_kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `nohp` varchar(191) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nohp` (`nohp`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +192,7 @@ CREATE TABLE `pemilik_kendaraan` (
 LOCK TABLES `pemilik_kendaraan` WRITE;
 /*!40000 ALTER TABLE `pemilik_kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI'),(2,'PT. PUTRA KARONA MANDIRI'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI'),(4,'TAXI PERORANGAN'),(5,'NON BUS PEDESAAN (KAT 2. CBG)');
+INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI','01'),(2,'PT. PUTRA KARONA MANDIRI','02'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI','03'),(4,'TAXI PERORANGAN','04'),(5,'NON BUS PEDESAAN (KAT 2. CBG)','05');
 /*!40000 ALTER TABLE `pemilik_kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -236,6 +238,38 @@ COMMIT;
 -- Dumped table `transaksi` with 0 row(s)
 --
 
+--
+-- Table structure for table `user`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nik` varchar(191) NOT NULL,
+  `password` varchar(191) NOT NULL,
+  `level` enum('b','o') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nik` (`nik`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `user` VALUES (1,'1234','124124','b'),(2,'1432','asdasd','o');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `user` with 2 row(s)
+--
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
@@ -245,4 +279,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 17 Jun 2019 09:32:30 +0200
+-- Dump completed on: Mon, 17 Jun 2019 10:02:44 +0200

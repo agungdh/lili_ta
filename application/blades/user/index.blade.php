@@ -23,8 +23,9 @@ User
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
 	                <tr>
-	                  <th>NIP</th>
+	                  <th>NIK</th>
                       <th>Nama</th>
+                      <th>Jabatan</th>
                       <th>Level</th>
                       <th>Proses</th>
 	                </tr>
@@ -32,9 +33,10 @@ User
                 <tbody>
                 	@foreach($users as $item)
                 	<tr>
-                        <td>{{$item->pegawai->nip}}</td>
-                        <td>{{$item->pegawai->nama}}</td>
-                        <td>{{$item->level == 'a' ? 'Admin' : 'Pegawai'}}</td>
+                        <td>{{$item->nik}}</td>
+                        <td>{{$item->karyawan->nama}}</td>
+                        <td>{{$item->karyawan->jabatan}}</td>
+                        <td>{{$item->level == 'b' ? 'Boss' : 'Operator'}}</td>
                 		
                 		<td>
                         <a class="btn btn-primary btn-sm" href="{{base_url()}}user/ubah/{{$item->id}}">

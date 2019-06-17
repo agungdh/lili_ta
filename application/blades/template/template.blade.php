@@ -2,7 +2,7 @@
 $config = helper()->getKonfigurasi();
 
 if(ci()->session->login) {
-  // $userData = getUserData();
+  $userData = getUserData();
 }
 @endphp
 
@@ -108,7 +108,7 @@ if(ci()->session->login) {
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{base_url()}}assets/favicon/favicon.png" class="user-image" alt="User Image">
-              {{-- <span class="hidden-xs">{{$userData->pegawai->nama}}</span> --}}
+              <span class="hidden-xs">{{$userData->karyawan->nama}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -116,8 +116,8 @@ if(ci()->session->login) {
                 <img src="{{base_url()}}assets/favicon/favicon.png" class="img-circle" alt="User Image">
 
                 <p>
-                    {{-- {{$userData->pegawai->nama}} --}}
-                    {{-- <small>{{$userData->pegawai->nip}}</small> --}}
+                    {{$userData->karyawan->nama}}
+                    <small>{{$userData->karyawan->nik}}</small>
                 </p>
               </li>
               <!-- Menu Footer-->

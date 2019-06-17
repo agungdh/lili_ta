@@ -51,8 +51,8 @@
 		<div data-toggle="tooltip" title="{{$message}}">
 			<select class="form-control select2" name="level">
 				<option {{$value == '' ? 'selected' : null}} value="">Pilih Level</option>
-				<option {{$value == 'a' ? 'selected' : null}} value="a">Admin</option>
-				<option {{$value == 'p' ? 'selected' : null}} value="p">Pegawai</option>
+				<option {{$value == 'b' ? 'selected' : null}} value="b">Boss</option>
+				<option {{$value == 'o' ? 'selected' : null}} value="o">Operator</option>
 			</select>
 		</div>
 	</div>

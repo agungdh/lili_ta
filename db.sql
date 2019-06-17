@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 17 Jun 2019 10:02:44 +0200
+-- Date: Mon, 17 Jun 2019 10:13:28 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,7 +57,7 @@ CREATE TABLE `karyawan` (
   `jabatan` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nik` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,12 +67,12 @@ CREATE TABLE `karyawan` (
 LOCK TABLES `karyawan` WRITE;
 /*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `karyawan` VALUES (4,'1234','Tukang nginput data','admin input'),(5,'1432','gak tau apa','admin gak tau');
+INSERT INTO `karyawan` VALUES (4,'1234','Tukang nginput data','admin input'),(5,'1432','gak tau apa','admin gak tau'),(6,'masgas da','mboh opo iki','asfasf'),(7,'12345678','Boss','Boss');
 /*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `karyawan` with 2 row(s)
+-- Dumped table `karyawan` with 4 row(s)
 --
 
 --
@@ -252,7 +252,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nik` (`nik`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,12 +262,12 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (1,'1234','124124','b'),(2,'1432','asdasd','o');
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$wGLW4fNiEeQRA0sBjaWdj.44LRLaDNmbszvSrm15ovRdV7VKXmbFm','b');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 2 row(s)
+-- Dumped table `user` with 1 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -279,4 +279,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 17 Jun 2019 10:02:44 +0200
+-- Dump completed on: Mon, 17 Jun 2019 10:13:28 +0200

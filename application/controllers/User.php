@@ -34,13 +34,13 @@ class User extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'id_pegawai' => 'required',
+			'nik' => 'required',
 			'level' => 'required',
 			'password' => 'required|confirmed',
 		]);
 
-		if (User_model::where(['id_pegawai' => $requestData['id_pegawai']])->first()) {
-			$validator->errors()->add('id_pegawai', 'User sudah ada !!!');
+		if (User_model::where(['nik' => $requestData['nik']])->first()) {
+			$validator->errors()->add('nik', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {
@@ -69,10 +69,10 @@ class User extends CI_Controller {
 
 	public function ubah($id)
 	{
-		$pegawais = Pegawai_model::all();
+		$karyawans = Karyawan_model::all();
 		$user = User_model::find($id);
 
-		return blade('user.ubah', compact(['user', 'pegawais']));
+		return blade('user.ubah', compact(['user', 'karyawans']));
 	}
 
 	public function aksiubah($id)
@@ -82,13 +82,13 @@ class User extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'id_pegawai' => 'required',
+			'nik' => 'required',
 			'level' => 'required',
 			'password' => 'confirmed',
 		]);
 
-		if ($requestData['id_pegawai'] != $user->id_pegawai && User_model::where(['id_pegawai' => $requestData['id_pegawai']])->first()) {
-			$validator->errors()->add('id_pegawai', 'User sudah ada !!!');
+		if ($requestData['nik'] != $user->nik && User_model::where(['nik' => $requestData['nik']])->first()) {
+			$validator->errors()->add('nik', 'User sudah ada !!!');
 		}
 
 		if (count($validator->errors()) > 0) {

@@ -1,9 +1,13 @@
+@php
+$config = helper()->getKonfigurasi();
+@endphp
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{getenv('APP_TITLE')}}</title>
+  <title>{{$config['APP_TITLE']}}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -33,17 +37,17 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{base_url()}}"><b>{{getenv('APP_TITLE_SHORT')}}</b></a>
+    <a href="{{base_url()}}"><b>{{$config['APP_TITLE_SHORT']}}</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">{{getenv('APP_TITLE')}}</p>
+    <p class="login-box-msg">{{$config['APP_TITLE']}}</p>
 
     <form action="{{base_url()}}log/in" method="post">
       @php
-      if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nip')) {
+      if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('nik')) {
         $class = 'form-group has-feedback has-error';
-        $message = ci()->session->flashdata('errors')->first('nip');
+        $message = ci()->session->flashdata('errors')->first('nik');
       } else {
         $class = 'form-group has-feedback';
         $message = '';
@@ -51,7 +55,7 @@
       @endphp
       <div class="{{$class}}">
         <div data-toggle="tooltip" title="{{$message}}">
-          <input name="nip" type="text" class="form-control" placeholder="NIP" value="{{ci()->session->flashdata('old') ? ci()->session->flashdata('old')['nip'] : ''}}">
+          <input name="nik" type="text" class="form-control" placeholder="NIK" value="{{ci()->session->flashdata('old') ? ci()->session->flashdata('old')['nik'] : ''}}">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
       </div>

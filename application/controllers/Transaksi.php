@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use application\eloquents\Transaksi as Transaksi_model;
 use application\eloquents\Loket as Loket_model;
 use application\eloquents\Kendaraan as Kendaraan_model;
+use application\eloquents\PemilikKendaraan as PemilikKendaraan_model;
 
 class Transaksi extends CI_Controller {
 	public function __construct()
@@ -16,11 +17,28 @@ class Transaksi extends CI_Controller {
 		// helper()->auth(['a']);
 	}
 
+	public function ajaxtable($id_pemilik_kendaraan = null)
+	{
+		if ($id_pemilik_kendaraan) {
+			$kendaraanIDArrays_raw = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->get();
+			$kendaraanIDArrays = [];
+			foreach ($kendaraanIDArrays_raw as $item) {
+				$kendaraanIDArrays[] = $item->id;
+			}
+
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->whereIn('id_kendaraan', $kendaraanIDArrays)->get();
+		} else {
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->get();
+		}
+
+		return blade('transaksi.ajaxtable', compact(['transaksis']));
+	}
+
 	public function index()
 	{
-		$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->get();
+		$pemilikKendaraans = PemilikKendaraan_model::all();
 		
-		return blade('transaksi.index', compact(['transaksis']));
+		return blade('transaksi.index', compact(['pemilikKendaraans']));
 	}
 
 	public function tambah()

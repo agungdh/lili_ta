@@ -61,14 +61,6 @@ class Helper extends \agungdh\Pustaka
 	public static function bootEloquent() {
 		$db = new DB;
 
-		// $db->addConnection([
-		// 	"driver"    => "mysql",
-		// 	"host" => getenv('DB_HOST'),
-		// 	"database" => getenv('DB_DB'),
-		// 	"username" => getenv('DB_USER'),
-		// 	"password" => getenv('DB_PASS')
-		// ]);
-
 		$db->addConnection([
 			"driver"    => "mysql",
 			"host" => 'localhost',

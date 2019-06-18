@@ -112,7 +112,7 @@ class Pemilikkendaraan extends CI_Controller {
 			'alert',
 			[
 				'title' => 'ERROR !!!',
-                'message' => getenv('CI_ENV') == 'development' ? $exception->getMessage() : 'Something Went Wrong !!!',
+                'message' => ENVIRONMENT == 'development' ? $exception->getMessage() : 'Something Went Wrong !!!',
                 'class' => 'error',
 			]);
 

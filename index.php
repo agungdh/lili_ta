@@ -1,11 +1,6 @@
 <?php
 require_once('vendor/autoload.php');
 
-// Env
-$dotenv = Dotenv\Dotenv::create(__DIR__);
-$dotenv->load();
-// Env
-
 /**
  * CodeIgniter
  *
@@ -60,7 +55,8 @@ $dotenv->load();
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', 'development');
+	define('HTTPS_ONLY', false);
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

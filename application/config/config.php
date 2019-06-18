@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = '';
-if (getenv('HTTPS_ONLY') == 'true') {
+if (HTTPS_ONLY == 'true') {
 $base_url = 'https';
 } else {
 $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http"); 	

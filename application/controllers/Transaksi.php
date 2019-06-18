@@ -79,20 +79,36 @@ class Transaksi extends CI_Controller {
 
 	public function ubah($id)
 	{
-		$loket = Loket_model::find($id);
+		$transaksi = Transaksi_model::find($id);
+		$transaksi->tanggal = helper()->tanggalIndo($transaksi->tanggal);
 
-		return blade('transaksi.ubah', compact(['loket']));
+		$lokets = Loket_model::all();
+		$kendaraans = Kendaraan_model::with('pemilikKendaraan')->get();
+
+		return blade('transaksi.ubah', compact(['transaksi', 'lokets', 'kendaraans']));
 	}
 
 	public function aksiubah($id)
 	{
-		$loket = Loket_model::find($id);
+		$transaksi = Transaksi_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'lokasi' => 'required',
+			'id_kendaraan' => 'required',
+			'id_loket' => 'required',
+			'tanggal' => 'required',
+			'bulan' => 'required|numeric|min:1|max:12',
+			'tahun' => 'required|numeric|min:1900|max:2900',
+			'outstanding' => 'required|numeric|min:0',
+			'potensi' => 'required|numeric|min:0',
 		]);
+
+		if (($requestData['id_kendaraan'] != $transaksi->id_kendaraan || $requestData['bulan'] != $transaksi->bulan || $requestData['tahun'] != $transaksi->tahun) && Transaksi_model::where(['id_kendaraan' => $requestData['id_kendaraan'], 'bulan' => $requestData['bulan'], 'tahun' => $requestData['tahun']])->first()) {
+			$validator->errors()->add('id_kendaraan', 'Transaksi sudah ada !!!');
+			$validator->errors()->add('bulan', 'Transaksi sudah ada !!!');
+			$validator->errors()->add('tahun', 'Transaksi sudah ada !!!');
+		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -101,7 +117,12 @@ class Transaksi extends CI_Controller {
 			redirect(base_url('transaksi/ubah/' . $id));
 		}
 
-		Loket_model::where('id', $id)->update($requestData);
+		$requestData['nik'] = getUserData()->nik;
+		$requestData['outstanding'] = str_replace('.', '', $requestData['outstanding']);
+		$requestData['potensi'] = str_replace('.', '', $requestData['potensi']);
+		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+
+		Transaksi_model::where('id', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -118,7 +139,7 @@ class Transaksi extends CI_Controller {
 	public function aksihapus($id)
 	{
 		try {
-			Loket_model::where('id', $id)->delete();
+			Transaksi_model::where('id', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',

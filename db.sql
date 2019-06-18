@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Tue, 18 Jun 2019 05:53:14 +0200
+-- Date: Tue, 18 Jun 2019 06:06:39 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -94,7 +94,7 @@ CREATE TABLE `kendaraan` (
   KEY `id_pemilik_kendaraan` (`id_pemilik_kendaraan`),
   CONSTRAINT `kendaraan_ibfk_1` FOREIGN KEY (`id_formula_tarif`) REFERENCES `formula_tarif` (`id`),
   CONSTRAINT `kendaraan_ibfk_2` FOREIGN KEY (`id_pemilik_kendaraan`) REFERENCES `pemilik_kendaraan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,12 +104,12 @@ CREATE TABLE `kendaraan` (
 LOCK TABLES `kendaraan` WRITE;
 /*!40000 ALTER TABLE `kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `kendaraan` VALUES (3,2,2,'BE 1337 EE',12,12,12,2020);
+INSERT INTO `kendaraan` VALUES (3,2,2,'BE 1337 EE',12,12,12,2020),(4,1,1,'BE 2032 JC',3,3,6,2019);
 /*!40000 ALTER TABLE `kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `kendaraan` with 1 row(s)
+-- Dumped table `kendaraan` with 2 row(s)
 --
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `transaksi` (
   CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_kendaraan`) REFERENCES `kendaraan` (`id`),
   CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_loket`) REFERENCES `loket` (`id`),
   CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `transaksi` (
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `transaksi` VALUES (2,'12345678',3,1,'2019-06-18',1234,5678,4,2019),(3,'12345678',3,2,'2019-06-18',21,123123,5,2019);
+INSERT INTO `transaksi` VALUES (2,'12345678',4,1,'2019-06-13',1234,5678,6,2019),(4,'12345678',3,2,'2019-06-18',21,123123,6,2019);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -280,4 +280,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Tue, 18 Jun 2019 05:53:14 +0200
+-- Dump completed on: Tue, 18 Jun 2019 06:06:39 +0200

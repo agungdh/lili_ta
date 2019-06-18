@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Loket
+Transaksi
 @endsection
 
 @section('nav')
-@include('loket.nav')
+@include('transaksi.nav')
 @endsection
 
 @section('content')
@@ -13,15 +13,15 @@ Loket
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">Ubah Loket</h3>
+				<h3 class="box-title">Ubah Transaksi</h3>
 			</div>
 
-			<form action="{{base_url()}}loket/aksiubah/{{$loket->id}}" method="post" role="form">
-				@include('loket.form')
+			<form action="{{base_url()}}transaksi/aksiubah/{{$transaksi->id}}" method="post" role="form">
+				@include('transaksi.form')
 
 				<div class="box-footer">
 					<button type="submit" class="btn btn-success">Simpan</button>
-					<a href="{{base_url()}}loket" class="btn btn-info">Batal</a>
+					<a href="{{base_url()}}transaksi" class="btn btn-info">Batal</a>
 				</div>
 			</form>
 		</div>

@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Mon, 17 Jun 2019 10:18:45 +0200
+-- Date: Tue, 18 Jun 2019 05:53:14 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -180,7 +180,7 @@ CREATE TABLE `pemilik_kendaraan` (
   `nohp` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nohp` (`nohp`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +212,8 @@ CREATE TABLE `transaksi` (
   `tanggal` date NOT NULL,
   `outstanding` int(11) NOT NULL,
   `potensi` int(11) NOT NULL,
+  `bulan` int(11) NOT NULL,
+  `tahun` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_kendaraan` (`id_kendaraan`),
   KEY `id_loket` (`id_loket`),
@@ -219,7 +221,7 @@ CREATE TABLE `transaksi` (
   CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_kendaraan`) REFERENCES `kendaraan` (`id`),
   CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_loket`) REFERENCES `loket` (`id`),
   CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,11 +231,12 @@ CREATE TABLE `transaksi` (
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
 SET autocommit=0;
+INSERT INTO `transaksi` VALUES (2,'12345678',3,1,'2019-06-18',1234,5678,4,2019),(3,'12345678',3,2,'2019-06-18',21,123123,5,2019);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `transaksi` with 0 row(s)
+-- Dumped table `transaksi` with 2 row(s)
 --
 
 --
@@ -277,4 +280,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 17 Jun 2019 10:18:45 +0200
+-- Dump completed on: Tue, 18 Jun 2019 05:53:14 +0200

@@ -5,6 +5,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Database\QueryException;
 
 use application\eloquents\Transaksi as Transaksi_model;
+use application\eloquents\Loket as Loket_model;
+use application\eloquents\Kendaraan as Kendaraan_model;
 
 class Transaksi extends CI_Controller {
 	public function __construct()
@@ -16,14 +18,17 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-		$transaksis = Loket_model::all();
+		$transaksis = Transaksi_model::all();
 		
 		return blade('transaksi.index', compact(['transaksis']));
 	}
 
 	public function tambah()
 	{
-		return blade('transaksi.tambah');
+		$lokets = Loket_model::all();
+		$kendaraans = Kendaraan_model::with('pemilikKendaraan')->get();
+
+		return blade('transaksi.tambah', compact(['lokets', 'kendaraans']));
 	}
 
 	public function aksitambah()
@@ -31,8 +36,20 @@ class Transaksi extends CI_Controller {
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
-			'lokasi' => 'required',
+			'id_kendaraan' => 'required',
+			'id_loket' => 'required',
+			'tanggal' => 'required',
+			'bulan' => 'required|numeric|min:1|max:12',
+			'tahun' => 'required|numeric|min:1900|max:2900',
+			'outstanding' => 'required|numeric|min:0',
+			'potensi' => 'required|numeric|min:0',
 		]);
+
+		if (Transaksi_model::where(['id_kendaraan' => $requestData['id_kendaraan'], 'bulan' => $requestData['bulan'], 'tahun' => $requestData['tahun']])->first()) {
+			$validator->errors()->add('id_kendaraan', 'Transaksi sudah ada !!!');
+			$validator->errors()->add('bulan', 'Transaksi sudah ada !!!');
+			$validator->errors()->add('tahun', 'Transaksi sudah ada !!!');
+		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -41,7 +58,12 @@ class Transaksi extends CI_Controller {
 			redirect(base_url('transaksi/tambah'));
 		}
 
-		Loket_model::insert($requestData);
+		$requestData['nik'] = getUserData()->nik;
+		$requestData['outstanding'] = str_replace('.', '', $requestData['outstanding']);
+		$requestData['potensi'] = str_replace('.', '', $requestData['potensi']);
+		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
+
+		Transaksi_model::insert($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',

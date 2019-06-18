@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Loket
+Transaksi
 @endsection
 
 @section('nav')
-@include('loket.nav')
+@include('transaksi.nav')
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@ Loket
 	<div class="col-md-12">
 		<div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Data Loket</h3>
+              <h3 class="box-title">Data Transaksi</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            	<a class="btn btn-success btn-sm" href="{{base_url()}}loket/tambah">
+            	<a class="btn btn-success btn-sm" href="{{base_url()}}transaksi/tambah">
                   <i class="glyphicon glyphicon-plus"></i> Tambah
                 </a><br><br>
               <table class="table table-bordered table-hover datatable" style="width: 100%">
@@ -28,12 +28,12 @@ Loket
 	                </tr>
                 </thead>
                 <tbody>
-                	@foreach($lokets as $item)
+                	@foreach($transaksis as $item)
                 	<tr>
-                    <td>{{$item->lokasi}}</td>
+                    <td>{{$item->id}}</td>
                 		
                 		<td>
-                      <a class="btn btn-primary btn-sm" href="{{base_url()}}loket/ubah/{{$item->id}}">
+                      <a class="btn btn-primary btn-sm" href="{{base_url()}}transaksi/ubah/{{$item->id}}">
     	                  <i class="glyphicon glyphicon-pencil"></i> Ubah
     	                </a>
 
@@ -61,7 +61,7 @@ function hapus(id) {
 	  confirmButtonColor: "#DD6B55",
 	  confirmButtonText: "Hapus",
 	}, function(){
-	  window.location = "{{base_url()}}loket/aksihapus/" + id;
+	  window.location = "{{base_url()}}transaksi/aksihapus/" + id;
 	});
 }
 </script>

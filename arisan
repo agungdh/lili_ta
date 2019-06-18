@@ -27,10 +27,10 @@ class arisan extends CLI
         elseif ($options->getOpt('dumpdb'))
         {
             $this->notice("Preparing ...\n");
-            $database = getenv('DB_DB');
-            $user = getenv('DB_USER');
-            $pass = getenv('DB_PASS');
-            $host = getenv('DB_HOST');
+            $database = 'lili_ta';
+            $user = 'root';
+            $pass = '';
+            $host = 'localhost';
          
             $this->info(
                 "Host\t\t: " . $host . "\n" . 
@@ -58,10 +58,10 @@ class arisan extends CLI
         elseif ($options->getOpt('importdb'))
         {
             $this->info("Preparing ...\n");
-            $database = env('DB_DB');
-            $user = env('DB_USER');
-            $pass = env('DB_PASS');
-            $host = env('DB_HOST');
+            $database = 'lili_ta';
+            $user = 'root';
+            $pass = '';
+            $host = 'localhost';
 
             $this->info("Drop all tables");
             Pustaka::dropTableView($host, $user, $pass, $database);
@@ -80,9 +80,6 @@ class arisan extends CLI
         }
     }
 }
-
-$dotenv = Dotenv\Dotenv::create(__DIR__);
-$dotenv->load();
 
 $cli = new arisan();
 $cli->run();

@@ -15,4 +15,15 @@ class Welcome extends CI_Controller {
 			return blade('template.login');
 		}
 	}
+	
+	public function getkuotasms()
+	{
+		$req = helper()->cekKuotaSms();
+		
+		if(isset($req->message->value)) {
+			echo $req->message->value;
+		} else {
+			echo $req->message->text;
+		}
+	}
 }

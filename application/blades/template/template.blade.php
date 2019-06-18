@@ -104,6 +104,14 @@ if(ci()->session->login) {
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+
+          <li class="dropdown messages-menu" title="Jumlah Kuota SMS: -" data-placement="bottom" id="liJumlahKuotaSms">
+            <a href="javascript:void(0)" class="dropdown-toggle">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-primary" id="jumlahKuotaSms">-</span>
+            </a>
+          </li>
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -274,5 +282,12 @@ function getDatePickerValue(id) {
     swal('{{ ci()->session->flashdata('alert')['title'] }}', '{{ ci()->session->flashdata('alert')['message'] }}', '{{ ci()->session->flashdata('alert')['class'] }}');
 </script>
 @endif
+<script type="text/javascript">
+  $.post('{{base_url()}}welcome/getkuotasms', function(data) {
+    $("#jumlahKuotaSms").text(data);
+    $("#liJumlahKuotaSms").prop('title', `Jumlah Kuota SMS: ${data}`);
+    $('#liJumlahKuotaSms').tooltip();
+  });
+</script>
 </body>
 </html>

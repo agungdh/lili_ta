@@ -1,9 +1,9 @@
 -- mysqldump-php https://github.com/ifsnop/mysqldump-php
 --
--- Host: 127.0.0.1	Database: lili_ta
+-- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Tue, 18 Jun 2019 06:14:08 +0200
+-- Date: Tue, 18 Jun 2019 08:16:59 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -253,7 +253,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nik` (`nik`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,12 +263,12 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (5,'12345678','$2y$10$XzHJeKzeIFa/o3mfAPtJr.OoN8s09JFnDMARimUgVUznfzXj7Xu/u','b');
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$XzHJeKzeIFa/o3mfAPtJr.OoN8s09JFnDMARimUgVUznfzXj7Xu/u','b'),(6,'1234','$2y$10$xOVWr8cBbkdSpm4I4f4zWutwLH4zNJjdTlROofxPCmkfhJUp9lerO','o');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 1 row(s)
+-- Dumped table `user` with 2 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -280,4 +280,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Tue, 18 Jun 2019 06:14:08 +0200
+-- Dump completed on: Tue, 18 Jun 2019 08:16:59 +0200

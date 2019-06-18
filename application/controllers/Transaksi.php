@@ -18,7 +18,7 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-		$transaksis = Transaksi_model::all();
+		$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->get();
 		
 		return blade('transaksi.index', compact(['transaksis']));
 	}

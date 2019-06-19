@@ -23,7 +23,7 @@ Transaksi
 
                 <div class="form-group has-feedback">
                     <select class="select2" id="pemilikkendaraan">
-                        <option value="">Pilih Pemilik transaksi</option>
+                        <option value="">Pilih Pemilik Kendaraan</option>
                         @foreach($pemilikKendaraans as $item)
                         <option value="{{$item->id}}">{{$item->nama}}</option>
                         @endforeach

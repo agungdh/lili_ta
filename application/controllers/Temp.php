@@ -6,7 +6,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 class Temp extends CI_Controller {
 	public function index()
 	{
-		// dd(helper()->getKonfigurasi());
-		dd(helper()->cekKuotaSms());
+		dd(
+			helper()->belumBayar(7,2019)
+		);
 	}
 }

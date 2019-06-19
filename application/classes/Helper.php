@@ -4,11 +4,25 @@ namespace application\classes;
 use Illuminate\Database\Capsule\Manager as DB;
 use application\eloquents\HariLibur as HariLibur_model;
 use application\eloquents\User as User_model;
-use application\eloquents\IjinAbsensi as IjinAbsensi_model;
-use application\eloquents\Absensi as Absensi_model;
+use application\eloquents\Kendaraan as Kendaraan_model;
+use application\eloquents\Transaksi as Transaksi_model;
 
 class Helper extends \agungdh\Pustaka
 {
+
+	public static function belumBayar($bulan, $tahun)
+	{
+		$kendaraansID_raw = Kendaraan_model::select('id')->where('mulai_penagihan_bulan', '<=', $bulan)->where('mulai_penagihan_tahun', '<=', $tahun)->get();
+
+		$kendaraansID = [];
+		foreach ($kendaraansID_raw as $item) {
+			$kendaraansID[] = $item->id;
+		}
+
+		$transaksis = Transaksi_model::whereIn('id_kendaraan', $kendaraansID)->where('bulan', $bulan)->where('tahun', $tahun)->count();
+
+		return count($kendaraansID) - $transaksis;
+	}
 
 	public static function bulanIndonesia()
 	{

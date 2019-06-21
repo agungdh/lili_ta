@@ -34,6 +34,12 @@ class Formulatarif extends CI_Controller {
 			'tarif' => 'required',
 		]);
 
+		$tarifValidate = str_replace('.', '', $requestData['tarif']);
+		if (FormulaTarif_model::where(['tarif' => $tarifValidate])->first()) {
+			$validator->errors()->add('tarif', 'Formula Tarif sudah ada !!!');
+		}
+
+
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
 			$this->session->set_flashdata('old', $requestData);
@@ -66,13 +72,18 @@ class Formulatarif extends CI_Controller {
 
 	public function aksiubah($id)
 	{
-		$formulatarif = FormulaTarif_model::find($id);
+		$formulaTarif = FormulaTarif_model::find($id);
 
 		$requestData = $this->input->post();
 		
 		$validator = validator()->make($requestData, [
 			'tarif' => 'required',
 		]);
+
+		$tarifValidate = str_replace('.', '', $requestData['tarif']);
+		if ($tarifValidate != $formulaTarif->tarif && FormulaTarif_model::where(['tarif' => $tarifValidate])->first()) {
+			$validator->errors()->add('tarif', 'Formula Tarif sudah ada !!!');
+		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());

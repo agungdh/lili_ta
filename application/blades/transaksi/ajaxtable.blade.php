@@ -6,6 +6,7 @@
       <th>Formula Tarif</th>
       <th>Seat</th>
       <th>Tanggal</th>
+      <th>Bulan/Tahun</th>
       <th>Loket</th>
       <th>Outstanding</th>
       <th>Potensi</th>
@@ -20,6 +21,7 @@
       <td>{{helper()->rupiah($item->kendaraan->formulaTarif->tarif)}}</td>
       <td>{{$item->kendaraan->seat_aktif}}/{{$item->kendaraan->jumlah_seat}}</td>
       <td>{{helper()->tanggalIndo($item->tanggal)}}</td>
+      <td>{{$item->bulan}}/{{$item->tahun}}</td>
       <td>{{$item->loket->lokasi}}</td>
       <td>{{helper()->rupiah($item->outstanding)}}</td>
       <td>{{helper()->rupiah($item->potensi)}}</td>

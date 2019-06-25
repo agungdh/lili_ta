@@ -24,6 +24,29 @@ class Helper extends \agungdh\Pustaka
 		return count($kendaraansID) - $transaksis;
 	}
 
+	public static function kendaraanBelumBayarPerBulanPerPemilikKendaraan($bulan, $tahun, $id_pemilik_kendaraan)
+	{
+		$kendaraansID_raw = Kendaraan_model::select('id')->where('mulai_penagihan_bulan', '<=', $bulan)->where('mulai_penagihan_tahun', '<=', $tahun)->where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->get();
+
+		$kendaraansID = [];
+		foreach ($kendaraansID_raw as $item) {
+			$kendaraansID[] = $item->id;
+		}
+
+		$kendaraansIDSudahBayars_raw = Transaksi_model::whereIn('id_kendaraan', $kendaraansID)->where('bulan', $bulan)->where('tahun', $tahun)->get();
+
+		$kendaraansIDSudahBayars = [];
+		foreach ($kendaraansIDSudahBayars_raw as $item) {
+			$kendaraansIDSudahBayars[] = $item->id_kendaraan;
+		}
+
+		$IDKendaraanBelumBayars = array_values(array_diff( $kendaraansID, $kendaraansIDSudahBayars));
+
+		$kendaraanBelumBayars = Kendaraan_model::whereIn('id', $IDKendaraanBelumBayars)->get();
+
+		return $kendaraanBelumBayars;
+	}
+
 	public static function bulanIndonesia()
 	{
 		return [

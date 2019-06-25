@@ -7,7 +7,7 @@ class Temp extends CI_Controller {
 	public function index()
 	{
 		dd(
-			helper()->belumBayar(7,2019)
+			helper()->kendaraanBelumBayarPerBulanPerPemilikKendaraan(7,2019, 2)
 		);
 	}
 }

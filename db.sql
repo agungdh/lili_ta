@@ -3,7 +3,7 @@
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Tue, 18 Jun 2019 08:16:59 +0200
+-- Date: Tue, 25 Jun 2019 09:34:39 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `formula_tarif` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tarif` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,12 +36,12 @@ CREATE TABLE `formula_tarif` (
 LOCK TABLES `formula_tarif` WRITE;
 /*!40000 ALTER TABLE `formula_tarif` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `formula_tarif` VALUES (1,70000),(2,95000),(3,55000),(4,65000);
+INSERT INTO `formula_tarif` VALUES (1,70000),(2,30000),(3,55000),(4,65000),(5,25000),(7,95000);
 /*!40000 ALTER TABLE `formula_tarif` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `formula_tarif` with 4 row(s)
+-- Dumped table `formula_tarif` with 6 row(s)
 --
 
 --
@@ -94,7 +94,7 @@ CREATE TABLE `kendaraan` (
   KEY `id_pemilik_kendaraan` (`id_pemilik_kendaraan`),
   CONSTRAINT `kendaraan_ibfk_1` FOREIGN KEY (`id_formula_tarif`) REFERENCES `formula_tarif` (`id`),
   CONSTRAINT `kendaraan_ibfk_2` FOREIGN KEY (`id_pemilik_kendaraan`) REFERENCES `pemilik_kendaraan` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,12 +104,12 @@ CREATE TABLE `kendaraan` (
 LOCK TABLES `kendaraan` WRITE;
 /*!40000 ALTER TABLE `kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `kendaraan` VALUES (3,2,2,'BE 1337 EE',12,12,12,2020),(4,1,1,'BE 2032 JC',3,3,6,2019);
+INSERT INTO `kendaraan` VALUES (3,2,2,'BE 1337 EE',12,12,3,2019),(4,1,1,'BE 2032 JC',3,3,6,2019),(5,3,3,'BE 2059 AU',28,28,6,2019),(6,3,3,'BE 2229 AU',28,28,6,2019),(7,2,1,'BE 7966 CU',20,28,6,2019),(8,2,1,'BE 7955 CU',28,28,7,2019),(9,2,1,'BE 2620 CU',28,28,6,2019),(10,2,1,'BE 2642 CU',28,28,6,2019),(11,1,1,'BE 2089 BW',28,28,6,2019),(12,1,1,'BE 2101 BW',28,28,6,2019),(13,3,3,'BE  2289 ',28,28,6,2019),(14,3,1,'BE 2423 BU',28,28,6,2019);
 /*!40000 ALTER TABLE `kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `kendaraan` with 2 row(s)
+-- Dumped table `kendaraan` with 12 row(s)
 --
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `transaksi` (
   CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_kendaraan`) REFERENCES `kendaraan` (`id`),
   CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_loket`) REFERENCES `loket` (`id`),
   CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,12 +231,12 @@ CREATE TABLE `transaksi` (
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `transaksi` VALUES (2,'12345678',4,1,'2019-06-13',1234,5678,6,2019),(4,'12345678',3,2,'2019-06-18',21,123123,6,2019);
+INSERT INTO `transaksi` VALUES (2,'12345678',4,1,'2019-06-13',1234,5678,6,2019),(4,'12345678',3,2,'2019-06-18',21,123123,7,2019),(5,'12345678',3,2,'2019-06-25',4000,0,5,2019),(6,'12345678',8,2,'2019-06-25',4000,0,7,2019);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `transaksi` with 2 row(s)
+-- Dumped table `transaksi` with 4 row(s)
 --
 
 --
@@ -253,7 +253,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nik` (`nik`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,12 +263,12 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (5,'12345678','$2y$10$XzHJeKzeIFa/o3mfAPtJr.OoN8s09JFnDMARimUgVUznfzXj7Xu/u','b'),(6,'1234','$2y$10$xOVWr8cBbkdSpm4I4f4zWutwLH4zNJjdTlROofxPCmkfhJUp9lerO','o');
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$XzHJeKzeIFa/o3mfAPtJr.OoN8s09JFnDMARimUgVUznfzXj7Xu/u','b');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 2 row(s)
+-- Dumped table `user` with 1 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -280,4 +280,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Tue, 18 Jun 2019 08:16:59 +0200
+-- Dump completed on: Tue, 25 Jun 2019 09:34:39 +0200

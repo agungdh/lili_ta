@@ -60,7 +60,7 @@ class Helper extends \agungdh\Pustaka
 				}
 			}
 
-			return $newDatas;
+			return array_diff($newDatas, [0]);
 		} else {
 			return [];
 		}

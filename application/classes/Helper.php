@@ -10,6 +10,22 @@ use application\eloquents\Transaksi as Transaksi_model;
 class Helper extends \agungdh\Pustaka
 {
 
+	public static function jumlahKendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan)
+	{
+		$data = self::kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan);
+
+		$newData = [];
+
+		$newData['count'] = count($data);
+		$newData['total'] = 0;
+
+		foreach ($data as $item) {
+			$newData['total'] += $item;
+		}
+
+		return $newData;
+	}
+
 	public static function kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan)
 	{
 		$lowestYear = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->orderBy('mulai_penagihan_tahun', 'ASC')->limit(1)->first();

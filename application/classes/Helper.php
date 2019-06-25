@@ -10,6 +10,62 @@ use application\eloquents\Transaksi as Transaksi_model;
 class Helper extends \agungdh\Pustaka
 {
 
+	public static function kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan)
+	{
+		$lowestYear = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->orderBy('mulai_penagihan_tahun', 'ASC')->limit(1)->first();
+		$lowestMonth = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->orderBy('mulai_penagihan_bulan', 'ASC')->limit(1)->first();
+
+		if($lowestYear && $lowestMonth) {
+			$lowestYear = $lowestYear->mulai_penagihan_tahun;
+			$lowestMonth = $lowestMonth->mulai_penagihan_bulan;
+
+
+			$bulansForLooping = [];
+			$bulanLoop = date('m');
+			$tahunLoop = date('Y');
+			$i = 0;
+			while ($bulanLoop != $lowestMonth || $tahunLoop != $lowestYear) {
+				$bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
+				$tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];	
+
+				$bulanLoop = $bulan;
+				$tahunLoop = $tahun;
+
+				$bulansForLooping[] = [$bulan, $tahun];
+
+				$i++;
+			}
+
+			$newDatas = [];
+
+			$kendaraansID_raw = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->get();
+
+			$kendaraansID = [];
+			foreach ($kendaraansID_raw as $item) {
+				$kendaraansID[] = $item->id;
+				$newDatas[$item->id] = 0;
+			}
+
+			$datas = [];
+
+			foreach ($bulansForLooping as $item) {
+				$datas[] = helper()->kendaraanBelumBayarPerBulanPerPemilikKendaraan($item[0], $item[1], $id_pemilik_kendaraan, false);
+			}
+
+			foreach ($datas as $item) {
+				foreach ($kendaraansID as $item2) {
+					if (in_array($item2, $item)) {
+						$newDatas[$item2]++;
+					}
+				}
+			}
+
+			return $newDatas;
+		} else {
+			return [];
+		}
+	}
+
 	public static function belumBayar($bulan, $tahun)
 	{
 		$kendaraansID_raw = Kendaraan_model::select('id')->where('mulai_penagihan_bulan', '<=', $bulan)->where('mulai_penagihan_tahun', '<=', $tahun)->get();
@@ -24,7 +80,7 @@ class Helper extends \agungdh\Pustaka
 		return count($kendaraansID) - $transaksis;
 	}
 
-	public static function kendaraanBelumBayarPerBulanPerPemilikKendaraan($bulan, $tahun, $id_pemilik_kendaraan)
+	public static function kendaraanBelumBayarPerBulanPerPemilikKendaraan($bulan, $tahun, $id_pemilik_kendaraan, $kendaraanInstance = true)
 	{
 		$kendaraansID_raw = Kendaraan_model::select('id')->where('mulai_penagihan_bulan', '<=', $bulan)->where('mulai_penagihan_tahun', '<=', $tahun)->where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->get();
 
@@ -44,7 +100,7 @@ class Helper extends \agungdh\Pustaka
 
 		$kendaraanBelumBayars = Kendaraan_model::whereIn('id', $IDKendaraanBelumBayars)->get();
 
-		return $kendaraanBelumBayars;
+		return $kendaraanInstance ? $kendaraanBelumBayars : $IDKendaraanBelumBayars;
 	}
 
 	public static function bulanIndonesia()

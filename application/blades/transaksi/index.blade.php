@@ -36,6 +36,10 @@ Transaksi
           </div>
     </div>
 </div>
+
+<div id="transaksiUtang">
+  
+</div>
 @endsection
 
 @section('js')
@@ -54,6 +58,7 @@ function hapus(id) {
 }
 
 $("#pemilikkendaraan").change(function() {
+  $("#transaksiUtang").html('');
   getAjaxTable($("#pemilikkendaraan").val());
 });
 
@@ -64,6 +69,35 @@ $(function() {
 function getAjaxTable(id = null) {
     if (id) {
         var idUrl = id;
+
+        $.ajax({
+          type: "GET",
+          url: `{{base_url()}}transaksi/ajaxtablekendaraan/${idUrl}`,
+          data: {
+            
+          },
+          success: function(data, textStatus, xhr ) {
+            $("#transaksiUtang").html(data);
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            console.table([
+              {
+                kolom: 'xhr',
+                data: xhr
+              },
+              {
+                kolom: 'textStatus',
+                data: textStatus
+              },
+              {
+                kolom: 'errorThrown',
+                data: errorThrown
+              }
+            ]);
+
+            swal('ERROR !!!', 'See console !!!', 'error');
+          }
+        });
     } else {
         var idUrl = '';
     }

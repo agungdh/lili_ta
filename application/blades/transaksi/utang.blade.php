@@ -6,7 +6,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-bordered table-hover" style="width: 100%" border="1">
+              <table class="table table-bordered table-hover" style="width: 100%">
                 <thead>
 	                <tr>   
                         <th>No Polisi</th>
@@ -18,7 +18,7 @@
                 <tbody>
                 	@foreach($kendaraans as $item)
                 	<tr>
-                        <td>{{$item->nomor_polisi}}</td>
+                        <td><b>{{$item->nomor_polisi}}</b></td>
                         <td>{{helper()->rupiah($item->formulaTarif->tarif)}}</td>
                         <td>{{$item->seat_aktif}}/{{$item->jumlah_seat}}</td>
                         <td>{{$hutangKendaraans[$item->id]}} Bulan</td>
@@ -27,11 +27,13 @@
                         $detailKendaraan = helper()->detilBulanTahunKendaraanBelumBayar($item->id);
                         @endphp
                         @if($detailKendaraan)
+                        <tr>
+                            <td><u>
                             @foreach($detailKendaraan['bulanTahunBelumBayar'] as $item2)
-                            <tr>
-                                <td colspan="4" style="text-align: right;">{{$item2[0]}}/{{$item2[1]}} </td>
-                            </tr>
+                                {{$item2[0]}}/{{$item2[1]}}, 
                         	@endforeach
+                            </u></td>
+                        </tr>
                         @endif
                     @endforeach
                 </tbody>

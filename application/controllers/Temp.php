@@ -9,6 +9,6 @@ use application\eloquents\Transaksi as Transaksi_model;
 class Temp extends CI_Controller {
 	public function index()
 	{
-		dd(helper()->jumlahBelumBayar(2));
+		echo helper()->textKePemilik(2);
 	}
 }

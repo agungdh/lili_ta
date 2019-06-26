@@ -6,9 +6,25 @@ use application\eloquents\HariLibur as HariLibur_model;
 use application\eloquents\User as User_model;
 use application\eloquents\Kendaraan as Kendaraan_model;
 use application\eloquents\Transaksi as Transaksi_model;
+use application\eloquents\PemilikKendaraan as PemilikKendaraan_model;
 
 class Helper extends \agungdh\Pustaka
 {
+
+	public function textKePemilik($id_pemilik_kendaraan)
+	{
+		$pemilikKendaraan = PemilikKendaraan_model::findOrFail($id_pemilik_kendaraan);
+
+		$belumBayar = self::jumlahBelumBayar($id_pemilik_kendaraan);
+		$jumlahKendaraan = $belumBayar['jumlah'];
+		$totalBulanBelumBayar = $belumBayar['total'];
+
+		$url = base_url();
+		$url = str_replace('http://', '', $url);
+		$url = str_replace('https://', '', $url);
+
+		return "Anda mempunyai {$jumlahKendaraan} kendaraan dengan jumlah {$totalBulanBelumBayar} bulan yang belum dibayar. Buka link ini untuk lebih lanjut {$url}cek/{$pemilikKendaraan->nohp}";
+	}
 
 	public function jumlahBelumBayar($id_pemilik_kendaraan)
 	{

@@ -17,6 +17,18 @@ class Transaksi extends CI_Controller {
 		// helper()->auth(['a']);
 	}
 
+	public function ajaxtablekendaraan($id_pemilik_kendaraan)
+	{
+		$hutangKendaraans = helper()->kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan);
+		$IDKendaraans = [];
+		foreach ($hutangKendaraans as $key => $value) {
+			$IDKendaraans[] = $key;
+		}
+		$kendaraans = Kendaraan_model::whereIn('id', $IDKendaraans)->get();
+
+		return blade('transaksi.utang', compact(['IDKendaraans', 'kendaraans', 'hutangKendaraans']));
+	}
+
 	public function ajaxtable($id_pemilik_kendaraan = null)
 	{
 		if ($id_pemilik_kendaraan) {

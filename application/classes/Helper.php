@@ -10,6 +10,39 @@ use application\eloquents\Transaksi as Transaksi_model;
 class Helper extends \agungdh\Pustaka
 {
 
+	public function detilBulanTahunKendaraanBelumBayar($id_kendaraan)
+	{
+		$kendaraan = Kendaraan_model::find($id_kendaraan);
+
+		$bulanLoop = date('m');
+		$tahunLoop = date('Y');
+		$i = 0;
+		$bulanTahunSudahBayar = [];
+		$bulanTahunBelumBayar = [];
+		$bulansForLooping = [];
+		do {
+			$bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
+			$tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];	
+
+			$bulanLoop = $bulan;
+			$tahunLoop = $tahun;
+
+			$bulansForLooping[] = [$bulan, $tahun];
+
+			$transaksiTemp = Transaksi_model::where('id_kendaraan', $id_kendaraan)->where('bulan', $bulan)->where('tahun', $tahun)->first();
+
+			if($transaksiTemp) {
+				$bulanTahunSudahBayar[] = [$bulan, $tahun];
+			} else {
+				$bulanTahunBelumBayar[] = [$bulan, $tahun];
+			}
+
+			$i++;
+		} while ($bulanLoop != $kendaraan->mulai_penagihan_bulan || $tahunLoop != $kendaraan->mulai_penagihan_tahun);
+
+		return compact(['kendaraan', 'bulansForLooping', 'bulanTahunBelumBayar', 'bulanTahunSudahBayar']);
+	}
+
 	public static function jumlahKendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan)
 	{
 		$data = self::kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan($id_pemilik_kendaraan);

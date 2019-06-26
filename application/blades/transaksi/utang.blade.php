@@ -17,24 +17,24 @@
                 </thead>
                 <tbody>
                 	@foreach($kendaraans as $item)
+                    @php
+                    $detailKendaraan = helper()->detilBulanTahunKendaraanBelumBayar($item->id);
+                    @endphp
+                    @if(count($detailKendaraan['bulanTahunBelumBayar']) > 0)
                 	<tr>
                         <td><b>{{$item->nomor_polisi}}</b></td>
                         <td>{{helper()->rupiah($item->formulaTarif->tarif)}}</td>
                         <td>{{$item->seat_aktif}}/{{$item->jumlah_seat}}</td>
-                        <td>{{$hutangKendaraans[$item->id]}} Bulan</td>
+                        <td>{{count($detailKendaraan['bulanTahunBelumBayar'])}} Bulan</td>
                 	</tr>
-                        @php
-                        $detailKendaraan = helper()->detilBulanTahunKendaraanBelumBayar($item->id);
-                        @endphp
-                        @if($detailKendaraan)
-                        <tr>
-                            <td><u>
-                            @foreach($detailKendaraan['bulanTahunBelumBayar'] as $item2)
-                                {{$item2[0]}}/{{$item2[1]}}, 
-                        	@endforeach
-                            </u></td>
-                        </tr>
-                        @endif
+                    <tr>
+                        <td><u>
+                        @foreach($detailKendaraan['bulanTahunBelumBayar'] as $item2)
+                            {{$item2[0]}}/{{$item2[1]}}, 
+                    	@endforeach
+                        </u></td>
+                    </tr>
+                    @endif
                     @endforeach
                 </tbody>
               </table>

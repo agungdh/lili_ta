@@ -68,12 +68,11 @@ class Helper extends \agungdh\Pustaka
 			$lowestYear = $lowestYear->mulai_penagihan_tahun;
 			$lowestMonth = $lowestMonth->mulai_penagihan_bulan;
 
-
 			$bulansForLooping = [];
 			$bulanLoop = date('m');
 			$tahunLoop = date('Y');
 			$i = 0;
-			while ($bulanLoop != $lowestMonth || $tahunLoop != $lowestYear) {
+			do {
 				$bulan = explode('-', date("m-Y", strtotime("-" . $i . " months")))[0];
 				$tahun = explode('-', date("m-Y", strtotime("-" . $i . " months")))[1];	
 
@@ -83,7 +82,7 @@ class Helper extends \agungdh\Pustaka
 				$bulansForLooping[] = [$bulan, $tahun];
 
 				$i++;
-			}
+			} while ($bulanLoop != $lowestMonth || $tahunLoop != $lowestYear);
 
 			$newDatas = [];
 
@@ -108,7 +107,7 @@ class Helper extends \agungdh\Pustaka
 					}
 				}
 			}
-
+			// return compact(['datas', 'bulansForLooping', 'newDatas', 'kendaraansID']);
 			return array_diff($newDatas, [0]);
 		} else {
 			return [];

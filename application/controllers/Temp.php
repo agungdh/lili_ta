@@ -9,6 +9,6 @@ use application\eloquents\Transaksi as Transaksi_model;
 class Temp extends CI_Controller {
 	public function index()
 	{
-		dd(helper()->detilBulanTahunKendaraanBelumBayar(8));
+		dd(helper()->kendaraansBelumBayarSampaiSaatIniPerPemilikKendaraan(2));
 	}
 }

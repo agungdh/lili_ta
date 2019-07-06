@@ -31,10 +31,10 @@ class Temp extends CI_Controller {
 
 		$datas = [];
 		foreach ($belumBayarsPerPemilik as $key => $value) {
-			$datas[$key] = helper()->textKePemilik($key);	
+			$datas[$key] = helper()->textKePemilik($key);
+			$id = DB::table('log')->insertGetId('request', $datas[$key]);
+			
 		}
-
-		return compact(['datas']);
 	}
 
 	public function dataBelumBayar()

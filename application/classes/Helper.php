@@ -23,7 +23,7 @@ class Helper extends \agungdh\Pustaka
 		$url = str_replace('http://', '', $url);
 		$url = str_replace('https://', '', $url);
 
-		return "Anda mempunyai {$jumlahKendaraan} kendaraan dengan jumlah {$totalBulanBelumBayar} bulan yang belum dibayar. Buka link ini untuk lebih lanjut {$url}cek/{$pemilikKendaraan->nohp}";
+		return "Anda mempunyai {$jumlahKendaraan} kendaraan dengan jumlah {$totalBulanBelumBayar} bulan yang belum dibayar. Buka link ini untuk lebih lanjut {$url}cek/nohp/{$pemilikKendaraan->nohp}";
 	}
 
 	public static function jumlahBelumBayar($id_pemilik_kendaraan)
@@ -33,12 +33,20 @@ class Helper extends \agungdh\Pustaka
 		$kendaraanJadi = [];
 		$kendaraanJadi['total'] = 0;
 		$kendaraanJadi['jumlah'] = 0;
+		$kendaraanJadi['kendaraan'] = [];
+		$i = 0;
 		foreach($kendaraans as $item) {
 		    $detailKendaraan = self::detilBulanTahunKendaraanBelumBayar($item->id);
 		    if(count($detailKendaraan['bulanTahunBelumBayar']) > 0) {
+				$kendaraanJadi['kendaraan'][$i]['id'] = $item->id;
+				$kendaraanJadi['kendaraan'][$i]['jumlahBulanBelumBayar'] = count($detailKendaraan['bulanTahunBelumBayar']);
+				$kendaraanJadi['kendaraan'][$i]['detilBulanBelumBayar'] = $detailKendaraan['bulanTahunBelumBayar'];
+				$kendaraanJadi['kendaraan'][$i]['instance'] = Kendaraan_model::find($item->id);
+
 	        	$kendaraanJadi['total'] += count($detailKendaraan['bulanTahunBelumBayar']);
 	        	$kendaraanJadi['jumlah']++;
 		    }
+		    $i++;
 	    }
 
 	    return $kendaraanJadi;

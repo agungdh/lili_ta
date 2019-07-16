@@ -7,10 +7,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->login) {
-			$user = getUserData();
-			$pegawai = $user->pegawai;
-			
-			return blade('dashboard.index', compact(['user', 'pegawai']));
+			redirect(base_url('transaksi'));
 		} else {
 			return blade('template.login');
 		}

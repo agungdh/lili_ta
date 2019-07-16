@@ -45,3 +45,9 @@
     <i class="fa fa-address-book"></i> <span>User</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}laporan">
+    <i class="fa fa-address-book"></i> <span>Laporan</span>
+  </a>
+</li>

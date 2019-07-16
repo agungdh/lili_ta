@@ -2,8 +2,8 @@
 --
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
--- Server version 	5.5.5-10.1.38-MariaDB
--- Date: Wed, 26 Jun 2019 10:18:27 +0200
+-- Server version 	5.5.5-10.3.16-MariaDB
+-- Date: Tue, 16 Jul 2019 11:19:31 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -141,6 +141,41 @@ COMMIT;
 --
 
 --
+-- Table structure for table `log`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request` text NOT NULL,
+  `respond` text NOT NULL,
+  `datetime` datetime NOT NULL,
+  `req_id_pemilik_kendaraan` varchar(191) NOT NULL,
+  `req_nohp` varchar(191) NOT NULL,
+  `req_text` text NOT NULL,
+  `res_status` varchar(191) NOT NULL,
+  `res_text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log`
+--
+
+LOCK TABLES `log` WRITE;
+/*!40000 ALTER TABLE `log` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `log` VALUES (28,'{\"id_pemilik_kendaraan\":1,\"nohp\":\"085368530235\",\"text\":\"Anda mempunyai 4 kendaraan dengan jumlah 6 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/085368530235\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:16:53','1','085368530235','Anda mempunyai 4 kendaraan dengan jumlah 6 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/085368530235','99','Credit anda tidak mencukupi'),(29,'{\"id_pemilik_kendaraan\":2,\"nohp\":\"0853685302351\",\"text\":\"Anda mempunyai 5 kendaraan dengan jumlah 47 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/0853685302351\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:16:53','2','0853685302351','Anda mempunyai 5 kendaraan dengan jumlah 47 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/0853685302351','99','Credit anda tidak mencukupi'),(30,'{\"id_pemilik_kendaraan\":3,\"nohp\":\"0853685302352\",\"text\":\"Anda mempunyai 4 kendaraan dengan jumlah 8 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/0853685302352\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:16:53','3','0853685302352','Anda mempunyai 4 kendaraan dengan jumlah 8 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/0853685302352','99','Credit anda tidak mencukupi'),(31,'{\"id_pemilik_kendaraan\":1,\"nohp\":\"085368530235\",\"text\":\"Anda mempunyai 4 kendaraan dengan jumlah 6 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/085368530235\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:18:55','1','085368530235','Anda mempunyai 4 kendaraan dengan jumlah 6 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/085368530235','99','Credit anda tidak mencukupi'),(32,'{\"id_pemilik_kendaraan\":2,\"nohp\":\"0853685302351\",\"text\":\"Anda mempunyai 5 kendaraan dengan jumlah 47 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/0853685302351\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:18:55','2','0853685302351','Anda mempunyai 5 kendaraan dengan jumlah 47 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/0853685302351','99','Credit anda tidak mencukupi'),(33,'{\"id_pemilik_kendaraan\":3,\"nohp\":\"0853685302352\",\"text\":\"Anda mempunyai 4 kendaraan dengan jumlah 8 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost\\/lili_ta\\/cek\\/0853685302352\"}','{\"message\":{\"status\":\"99\",\"text\":\"Credit anda tidak mencukupi\"}}','2019-07-16 16:18:56','3','0853685302352','Anda mempunyai 4 kendaraan dengan jumlah 8 bulan yang belum dibayar. Buka link ini untuk lebih lanjut localhost/lili_ta/cek/0853685302352','99','Credit anda tidak mencukupi');
+/*!40000 ALTER TABLE `log` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `log` with 6 row(s)
+--
+
+--
 -- Table structure for table `loket`
 --
 
@@ -190,7 +225,7 @@ CREATE TABLE `pemilik_kendaraan` (
 LOCK TABLES `pemilik_kendaraan` WRITE;
 /*!40000 ALTER TABLE `pemilik_kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI','01'),(2,'PT. PUTRA KARONA MANDIRI','02'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI','03'),(4,'TAXI PERORANGAN','04'),(5,'NON BUS PEDESAAN (KAT 2. CBG)','05');
+INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI','085368530235'),(2,'PT. PUTRA KARONA MANDIRI','0853685302351'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI','0853685302352'),(4,'TAXI PERORANGAN','0853685302353'),(5,'NON BUS PEDESAAN (KAT 2. CBG)','0853685302354');
 /*!40000 ALTER TABLE `pemilik_kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -280,4 +315,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Wed, 26 Jun 2019 10:18:27 +0200
+-- Dump completed on: Tue, 16 Jul 2019 11:19:31 +0200

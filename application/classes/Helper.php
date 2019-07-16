@@ -11,7 +11,7 @@ use application\eloquents\PemilikKendaraan as PemilikKendaraan_model;
 class Helper extends \agungdh\Pustaka
 {
 
-	public function textKePemilik($id_pemilik_kendaraan)
+	public static function textKePemilik($id_pemilik_kendaraan)
 	{
 		$pemilikKendaraan = PemilikKendaraan_model::findOrFail($id_pemilik_kendaraan);
 
@@ -26,7 +26,7 @@ class Helper extends \agungdh\Pustaka
 		return "Anda mempunyai {$jumlahKendaraan} kendaraan dengan jumlah {$totalBulanBelumBayar} bulan yang belum dibayar. Buka link ini untuk lebih lanjut {$url}cek/{$pemilikKendaraan->nohp}";
 	}
 
-	public function jumlahBelumBayar($id_pemilik_kendaraan)
+	public static function jumlahBelumBayar($id_pemilik_kendaraan)
 	{
 		$kendaraans = Kendaraan_model::where('id_pemilik_kendaraan', $id_pemilik_kendaraan)->get();
 
@@ -44,7 +44,7 @@ class Helper extends \agungdh\Pustaka
 	    return $kendaraanJadi;
 	}
 
-	public function detilBulanTahunKendaraanBelumBayar($id_kendaraan)
+	public static function detilBulanTahunKendaraanBelumBayar($id_kendaraan)
 	{
 		$kendaraan = Kendaraan_model::find($id_kendaraan);
 
@@ -125,6 +125,28 @@ class Helper extends \agungdh\Pustaka
 		);
 	}
 
+	public static function kirimSms($nohp, $pesan)
+	{
+		$config = helper()->getKonfigurasi();
+
+		return json_decode(
+			json_encode(
+				simplexml_load_string(
+					file_get_contents(
+						"http://reguler.zenziva.net/apps/smsapi.php?userkey="
+						. $config['ZENZIVA_API_USER'] 
+						. "&passkey=" 
+						. $config['ZENZIVA_API_PASS']
+						. "&nohp="
+						. $nohp
+						. "&pesan="
+						. urlencode($pesan)
+					)
+				)
+			)
+		);
+	}
+
 	public static function bootEloquent() {
 		$db = new DB;
 
@@ -139,4 +161,59 @@ class Helper extends \agungdh\Pustaka
 		$db->setAsGlobal();
 		$db->bootEloquent();
 	}
+
+	public static function textBelumBayarPerPemilikKendaraan()
+	{
+		$dataBelumBayar = self::dataBelumBayar();
+
+		$datas = [];
+		foreach ($dataBelumBayar['belumBayarsPerPemilik'] as $key => $value) {
+			$datas[$key] = self::textKePemilik($key);
+
+			$text = $datas[$key];
+
+			$pemilikKendaraan = PemilikKendaraan_model::find($key);
+			$id = DB::table('log')->insertGetId([
+				'request' => json_encode([
+					'id_pemilik_kendaraan' => $pemilikKendaraan->id,
+					'nohp' => $pemilikKendaraan->nohp,
+					'text' => $text,
+				]),
+				'datetime' => date('Y-m-d H:i:s'),
+				'req_id_pemilik_kendaraan' => $pemilikKendaraan->id,
+				'req_nohp' => $pemilikKendaraan->nohp,
+				'req_text' => $text,
+			]);
+			
+			$rawKirimSms = self::kirimSms($pemilikKendaraan->nohp, $text);
+			DB::table('log')->where('id', $id)->update([
+				'respond' => json_encode($rawKirimSms),
+				'res_status' => $rawKirimSms->message->status,
+				'res_text' => $rawKirimSms->message->text,
+			]);
+		}
+	}
+
+	public static function dataBelumBayar()
+	{
+		$belumBayarsPerPemilik = [];
+		foreach (PemilikKendaraan_model::all() as $item) {
+			$belumBayarsPerPemilik[$item->id] = self::jumlahBelumBayar($item->id);
+
+			if ($belumBayarsPerPemilik[$item->id]['jumlah'] == 0) {
+				unset($belumBayarsPerPemilik[$item->id]);
+			}
+		}
+
+		$belumBayars = [];
+		$belumBayars['total'] = 0;
+		$belumBayars['jumlah'] = 0;
+		foreach ($belumBayarsPerPemilik as $item) {
+			$belumBayars['total'] += $item['total'];
+			$belumBayars['jumlah'] += $item['jumlah'];
+		}
+
+		return compact(['belumBayarsPerPemilik', 'belumBayars']);
+	}
+
 }

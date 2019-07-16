@@ -1,1 +1,1 @@
-<li><a href="{{ base_url() }}loket"><i class="fa fa-home"></i> Loket</a></li>
+<li><a href="{{ base_url() }}kendaraan"><i class="fa fa-home"></i> Kendaraan</a></li>

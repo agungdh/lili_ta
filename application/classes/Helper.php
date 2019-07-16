@@ -166,6 +166,7 @@ class Helper extends \agungdh\Pustaka
 	{
 		$dataBelumBayar = self::dataBelumBayar();
 
+		$printID = [];
 		$datas = [];
 		foreach ($dataBelumBayar['belumBayarsPerPemilik'] as $key => $value) {
 			$datas[$key] = self::textKePemilik($key);
@@ -191,7 +192,11 @@ class Helper extends \agungdh\Pustaka
 				'res_status' => $rawKirimSms->message->status,
 				'res_text' => $rawKirimSms->message->text,
 			]);
+
+			$printID[] = $id;
 		}
+
+		return DB::table('log')->whereIn('id', $printID)->get();
 	}
 
 	public static function dataBelumBayar()

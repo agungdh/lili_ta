@@ -32,19 +32,7 @@ class Kendaraan extends CI_Controller {
 		if ($id_pemilik_kendaraan) {
 			$jumlahBelumBayar = helper()->jumlahBelumBayar($id_pemilik_kendaraan);
 		} else {
-			$jumlahBelumBayar = [];
-			$jumlahBelumBayar['total'] = 0;
-			$jumlahBelumBayar['jumlah'] = 0;
-			$jumlahBelumBayar['kendaraan'] = [];
-			foreach (PemilikKendaraan_model::all() as $pemilikKendaraan) {
-				$belumBayar = helper()->jumlahBelumBayar($pemilikKendaraan->id);
-				$jumlahBelumBayar['total'] += $belumBayar['total'];
-				$jumlahBelumBayar['jumlah'] += $belumBayar['jumlah'];
-				
-				foreach ($belumBayar['kendaraan'] as $kendaraan) {
-					array_push($jumlahBelumBayar['kendaraan'], $kendaraan);
-				}
-			}
+			$jumlahBelumBayar = helper()->getBelumBayar();
 		}
 
 		return blade('kendaraan.ajaxtablebelumbayar', compact(['id_pemilik_kendaraan', 'jumlahBelumBayar']));

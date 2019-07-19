@@ -36,21 +36,6 @@ Kendaraan
           </div>
 	</div>
 </div>
-
-<div class="row" id="rowtableajaxbulantahunbelumbayar">
-  <div class="col-md-12">
-    <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Data Bulan Tahun Belum Bayar</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div id="tableajaxbulantahunbelumbayar"></div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-  </div>
-</div>
 @endsection
 
 @section('js')
@@ -95,39 +80,6 @@ function getAjaxTable(id = null) {
         }
 
         $("#tableajax").html(data);
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        console.table([
-          {
-            kolom: 'xhr',
-            data: xhr
-          },
-          {
-            kolom: 'textStatus',
-            data: textStatus
-          },
-          {
-            kolom: 'errorThrown',
-            data: errorThrown
-          }
-        ]);
-
-        swal('ERROR !!!', 'See console !!!', 'error');
-      }
-    });
-
-    $.ajax({
-      type: "GET",
-      url: `{{base_url()}}kendaraan/ajaxtablebelumbayar/${idUrl}`,
-      data: {
-        
-      },
-      success: function(data, textStatus, xhr ) {
-        if (typeof b !== 'undefined') {
-          b.destroy();
-        }
-
-        $("#tableajaxbulantahunbelumbayar").html(data);
       },
       error: function(xhr, textStatus, errorThrown) {
         console.table([

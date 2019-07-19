@@ -51,3 +51,9 @@
     <i class="fa fa-address-book"></i> <span>Laporan</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}kendaraanbelumbayar">
+    <i class="fa fa-address-book"></i> <span>Kendaraan Belum Bayar</span>
+  </a>
+</li>

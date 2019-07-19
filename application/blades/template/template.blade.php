@@ -112,6 +112,24 @@ if(ci()->session->login) {
             </a>
           </li>
 
+          @php
+          $jumlahBelumBayar = helper()->getBelumBayar();
+          @endphp
+
+          <li class="dropdown messages-menu" title="Jumlah Kendaraan Belum Bayar: {{$jumlahBelumBayar['jumlah']}}" data-placement="bottom" data-toggle="tooltip">
+            <a href="{{base_url('kendaraanbelumbayar')}}" class="dropdown-toggle">
+              <i class="fa fa-car"></i>
+              <span class="label label-primary">{{$jumlahBelumBayar['jumlah']}}</span>
+            </a>
+          </li>
+
+          <li class="dropdown messages-menu" title="Jumlah Bulan Belum Bayar: {{$jumlahBelumBayar['total']}}" data-placement="bottom" data-toggle="tooltip">
+            <a href="{{base_url('kendaraanbelumbayar')}}" class="dropdown-toggle">
+              <i class="fa fa-calendar"></i>
+              <span class="label label-primary">{{$jumlahBelumBayar['total']}}</span>
+            </a>
+          </li>
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

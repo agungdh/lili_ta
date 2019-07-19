@@ -229,4 +229,22 @@ class Helper extends \agungdh\Pustaka
 		return compact(['belumBayarsPerPemilik', 'belumBayars']);
 	}
 
+	public static function getBelumBayar() {
+		$jumlahBelumBayar = [];
+		$jumlahBelumBayar['total'] = 0;
+		$jumlahBelumBayar['jumlah'] = 0;
+		$jumlahBelumBayar['kendaraan'] = [];
+		foreach (PemilikKendaraan_model::all() as $pemilikKendaraan) {
+			$belumBayar = self::jumlahBelumBayar($pemilikKendaraan->id);
+			$jumlahBelumBayar['total'] += $belumBayar['total'];
+			$jumlahBelumBayar['jumlah'] += $belumBayar['jumlah'];
+			
+			foreach ($belumBayar['kendaraan'] as $kendaraan) {
+				array_push($jumlahBelumBayar['kendaraan'], $kendaraan);
+			}
+		}
+
+		return $jumlahBelumBayar;
+	}
+
 }

@@ -193,6 +193,8 @@ class Helper extends \agungdh\Pustaka
 				'req_nohp' => $pemilikKendaraan->nohp,
 				'req_text' => $text,
 			]);
+
+			// as
 			
 			$rawKirimSms = self::kirimSms($pemilikKendaraan->nohp, $text);
 			DB::table('log')->where('id', $id)->update([

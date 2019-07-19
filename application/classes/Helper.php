@@ -162,8 +162,8 @@ class Helper extends \agungdh\Pustaka
 			"driver"    => "mysql",
 			"host" => 'localhost',
 			"database" => 'lili_ta',
-			"username" => 'root',
-			"password" => '',
+			"username" => 'lili',
+			"password" => 'lili',
 		]);
 
 		$db->setAsGlobal();

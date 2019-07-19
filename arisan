@@ -28,8 +28,8 @@ class arisan extends CLI
         {
             $this->notice("Preparing ...\n");
             $database = 'lili_ta';
-            $user = 'root';
-            $pass = '';
+            $user = 'lili';
+            $pass = 'lili';
             $host = 'localhost';
          
             $this->info(
@@ -59,8 +59,8 @@ class arisan extends CLI
         {
             $this->info("Preparing ...\n");
             $database = 'lili_ta';
-            $user = 'root';
-            $pass = '';
+            $user = 'lili';
+            $pass = 'lili';
             $host = 'localhost';
 
             $this->info("Drop all tables");

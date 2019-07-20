@@ -48,7 +48,7 @@
 
 <li>
   <a href="{{ base_url() }}laporan">
-    <i class="fa fa-address-book"></i> <span>Laporan</span>
+    <i class="fa fa-address-book"></i> <span>Laporan Bulanan</span>
   </a>
 </li>
 

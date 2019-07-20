@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Kendaraan
+Kendaraan Belum Bayar
 @endsection
 
 @section('nav')
-@include('kendaraan.nav')
+<li><a href="{{ base_url() }}kendaraanbelumbayar"><i class="fa fa-home"></i> Kendaraan Belum Bayar</a></li>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@ Kendaraan
   <div class="col-md-12">
     <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Data Bulan Tahun Belum Bayar</h3>
+              <h3 class="box-title">Data Kendaraan Belum Bayar</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

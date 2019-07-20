@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Capsule\Manager as DB;
 
+use application\eloquents\Transaksi as Transaksi_model;
+
 class Laporan extends CI_Controller {
 
 	public function __construct()
@@ -19,17 +21,14 @@ class Laporan extends CI_Controller {
 
 	public function cetak($bulan, $tahun)
 	{
-		$pegawais = Pegawai_model::with([
-			'golongan', 
-			'eselon',
-		])->get();
+		$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'loket', 'karyawan')->whereRaw('month(tanggal) = ? AND year (tanggal) = ?', [$bulan, $tahun])->get();
 	
 		$dompdf = new Dompdf\Dompdf();
 		$dompdf->set_option('defaultFont', 'Courier');
 		$dompdf->setPaper('A4', 'landscape');
-		$dompdf->loadHtml(bladeHtml('laporanbulanan.pdf', compact(['pegawais', 'bulan', 'tahun'])));
+		$dompdf->loadHtml(bladeHtml('laporan.pdf', compact(['transaksis', 'bulan', 'tahun'])));
 		$dompdf->render();
-		$dompdf->stream('Absensi Pegawai BAPPEDA Pringsewu ' . helper()->tanggalIndoStringBulanTahun("{$bulan}-{$tahun}") . '.pdf');
+		$dompdf->stream('Laporan Bulanan Transaksi ' . helper()->tanggalIndoStringBulanTahun("{$bulan}-{$tahun}") . '.pdf', ["Attachment" => false]);
 	}
 
 }

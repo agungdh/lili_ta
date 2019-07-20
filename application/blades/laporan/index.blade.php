@@ -1,11 +1,11 @@
 @extends('template.template')
 
 @section('title')
-Riwayat Absensi
+Laporan Bulanan
 @endsection
 
 @section('nav')
-@include('dashboard.nav')
+<li><a href="{{ base_url() }}laporan"><i class="fa fa-home"></i> Laporan Bulanan</a></li>
 @endsection
 
 @section('content')
@@ -43,11 +43,9 @@ Riwayat Absensi
             </div>
           </div>
 
-        </div>
-
-        <div class="box-footer">
           <button type="button" class="btn btn-success" id="btnCetak">Cetak Laporan</button>
-        </div>  
+
+        </div>
           
       </div>
     </div>
@@ -57,13 +55,22 @@ Riwayat Absensi
 
 @section('js')
 <script type="text/javascript">
-  $("#btnCetak").click(function() {
+  function cetak() {
     if ($("#tahun").val() == '') {
       return false;
     }
 
-    var win = window.open(`{{base_url()}}laporanbulanan/cetak/${$("#bulan").val()}/${$("#tahun").val()}`, '_blank');
+    var win = window.open(`{{base_url()}}laporan/cetak/${$("#bulan").val()}/${$("#tahun").val()}`, '_blank');
     win.focus();
+  }
+
+  $("form").submit(function(e) {
+    e.preventDefault();
+    cetak();
+  });
+
+  $("#btnCetak").click(function() {
+    cetak();    
   });
 </script>
 @endsection

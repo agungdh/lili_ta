@@ -4,43 +4,39 @@
 	<title></title>
 </head>
 <body>
-<h3 style="text-align: center;">Absensi Pegawai BAPPEDA Pringsewu</h3>
+<h3 style="text-align: center;">Laporan Bulanan Transaksi PT Jasa Raharja</h3>
 <h3 style="text-align: center;">{{helper()->tanggalIndoStringBulanTahun("{$bulan}-{$tahun}")}}</h3>
 <table border="1" width="100%">
 	<thead>
 		<tr>
 			<th>NO</th>
-			<th>NIP</th>
-			<th>NAMA</th>
-			<th>GOLONGAN/PANGKAT</th>
-			<th>ESELON</th>
-			<th>JABATAN</th>
-			<th>TERLAMBAT</th>
-			<th>PULANG CEPAT</th>
-			<th>SAKIT</th>
-			<th>IJIN</th>
-			<th>CUTI</th>
-			<th>TIDAK ABSEN</th>
+			<th>Nomor Polisi</th>
+			<th>Pemilik Kendaraan</th>
+			<th>Formula Tarif</th>
+			<th>Seat</th>
+			<th>Tanggal</th>
+			<th>Bulan/Tahun</th>
+			<th>Loket</th>
+			<th>Outstanding</th>
+			<th>Potensi</th>
 		</tr>
 	</thead>
 	<tbody>
 		@php
 		$i = 1;
 		@endphp
-		@foreach($pegawais as $item)
+		@foreach($transaksis as $item)
 		<tr>
 			<td>{{$i++}}</td>
-			<td>{{$item->nip}}</td>
-			<td>{{$item->nama}}</td>
-			<td>{{$item->golongan->golongan}}/{{$item->golongan->ruang}} {{$item->golongan->pangkat}}</td>
-            <td>{{$item->eselon ? $item->eselon->eselon : '-'}}</td>
-			<td>{{$item->jabatan}}</td>
-			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun) ?: '-'}}</td>
-			<td>{{helper()->tidakSesuaiWaktu($item->id, $bulan, $tahun, false) ?: '-'}}</td>
-			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 's') ?: '-'}}</td>
-			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'i') ?: '-'}}</td>
-			<td>{{helper()->tidakMasuk($item->id, $bulan, $tahun, 'c') ?: '-'}}</td>
-			<td>{{helper()->jumlahGakAbsen($item->id, $bulan, $tahun)}}</td>
+			<td>{{$item->kendaraan->nomor_polisi}}</td>
+		      <td>{{$item->kendaraan->pemilikKendaraan->nama}}</td>
+		      <td>{{helper()->rupiah($item->kendaraan->formulaTarif->tarif)}}</td>
+		      <td>{{$item->kendaraan->seat_aktif}}/{{$item->kendaraan->jumlah_seat}}</td>
+		      <td>{{helper()->tanggalIndo($item->tanggal)}}</td>
+		      <td>{{$item->bulan}}/{{$item->tahun}}</td>
+		      <td>{{$item->loket->lokasi}}</td>
+		      <td>{{helper()->rupiah($item->outstanding)}}</td>
+		      <td>{{helper()->rupiah($item->potensi)}}</td>
 		</tr>
 		@endforeach
 	</tbody>

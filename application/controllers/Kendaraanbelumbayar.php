@@ -11,7 +11,7 @@ class Kendaraanbelumbayar extends CI_Controller {
 	{
 		parent::__construct();
 
-		// helper()->auth(['a']);
+		helper()->auth(['b', 'o']);
 	}
 
 	public function index()

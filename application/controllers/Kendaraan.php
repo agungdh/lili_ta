@@ -13,7 +13,7 @@ class Kendaraan extends CI_Controller {
 	{
 		parent::__construct();
 
-		// helper()->auth(['a']);
+		helper()->auth(['o']);
 	}
 
 	public function ajaxtable($id_pemilik_kendaraan = null)

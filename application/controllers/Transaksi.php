@@ -14,7 +14,7 @@ class Transaksi extends CI_Controller {
 	{
 		parent::__construct();
 
-		// helper()->auth(['a']);
+		helper()->auth(['o']);
 	}
 
 	public function ajaxtablekendaraan($id_pemilik_kendaraan)

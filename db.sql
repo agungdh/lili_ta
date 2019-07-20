@@ -3,7 +3,7 @@
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.40-MariaDB-0ubuntu0.18.04.1
--- Date: Sat, 20 Jul 2019 11:14:27 +0700
+-- Date: Sat, 20 Jul 2019 11:45:59 +0700
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -298,7 +298,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (5,'12345678','$2y$10$LhbGx3LCZ0dyy23VOGkOCeFf7C7mjDMku2rvILsKOntu/M.WkzOc6','b'),(6,'1432','$2y$10$h4T4cguKFFzQA8dqhfBoXuYzI81dp.hf6v5yM43eaWJ1fqR88YeJK','b');
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$LhbGx3LCZ0dyy23VOGkOCeFf7C7mjDMku2rvILsKOntu/M.WkzOc6','b'),(6,'1432','$2y$10$lRLPraBg1QI2cjkNVlox6egBe7A9kb5/Eght0lWk7ZYEsyVMOqICK','o');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -315,4 +315,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 20 Jul 2019 11:14:27 +0700
+-- Dump completed on: Sat, 20 Jul 2019 11:45:59 +0700

@@ -247,4 +247,12 @@ class Helper extends \agungdh\Pustaka
 		return $jumlahBelumBayar;
 	}
 
+	public static function auth($level) {
+		self::bootEloquent();
+
+		if (!ci()->session->login) {
+			redirect(base_url());
+		}
+	}
+
 }

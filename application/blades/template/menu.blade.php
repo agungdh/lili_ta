@@ -1,3 +1,4 @@
+@if(getUserData()->level == 'o')
 <li>
   <a href="{{ base_url() }}loket">
     <i class="fa fa-address-book"></i> <span>Loket</span>
@@ -47,6 +48,13 @@
 </li>
 
 <li>
+  <a href="{{ base_url() }}log">
+    <i class="fa fa-address-book"></i> <span>Log</span>
+  </a>
+</li>
+@endif
+
+<li>
   <a href="{{ base_url() }}laporan">
     <i class="fa fa-address-book"></i> <span>Laporan Bulanan</span>
   </a>
@@ -55,11 +63,5 @@
 <li>
   <a href="{{ base_url() }}kendaraanbelumbayar">
     <i class="fa fa-address-book"></i> <span>Kendaraan Belum Bayar</span>
-  </a>
-</li>
-
-<li>
-  <a href="{{ base_url() }}log">
-    <i class="fa fa-address-book"></i> <span>Log</span>
   </a>
 </li>

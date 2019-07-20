@@ -11,7 +11,7 @@ class Formulatarif extends CI_Controller {
 	{
 		parent::__construct();
 
-		// helper()->auth(['a']);
+		helper()->auth(['o']);
 	}
 
 	public function index()

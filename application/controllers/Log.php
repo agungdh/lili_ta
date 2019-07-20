@@ -8,8 +8,16 @@ use application\eloquents\Log as Log_model;
 
 class Log extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+
+	}
+
 	public function index()
 	{
+		helper()->auth(['b', 'o']);
+		
 		$logs = Log_model::with('pemilikKendaraan')->get();
 
 		return blade('log.index', compact(['logs']));

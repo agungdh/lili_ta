@@ -11,7 +11,7 @@ class Karyawan extends CI_Controller {
 	{
 		parent::__construct();
 
-		// helper()->auth(['a']);
+		helper()->auth(['o']);
 	}
 
 	public function getJabatan($phrase)

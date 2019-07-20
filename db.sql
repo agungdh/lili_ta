@@ -3,7 +3,7 @@
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.1.40-MariaDB-0ubuntu0.18.04.1
--- Date: Sat, 20 Jul 2019 10:19:41 +0700
+-- Date: Sat, 20 Jul 2019 11:14:27 +0700
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -315,4 +315,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 20 Jul 2019 10:19:41 +0700
+-- Dump completed on: Sat, 20 Jul 2019 11:14:27 +0700

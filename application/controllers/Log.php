@@ -4,8 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use Illuminate\Database\Capsule\Manager as DB;
 
 use application\eloquents\Karyawan as Karyawan_model;
+use application\eloquents\Log as Log_model;
 
 class Log extends CI_Controller {
+
+	public function index()
+	{
+		$logs = Log_model::with('pemilikKendaraan')->get();
+
+		return blade('log.index', compact(['logs']));
+	}
 
 	public function in()
 	{

@@ -57,3 +57,9 @@
     <i class="fa fa-address-book"></i> <span>Kendaraan Belum Bayar</span>
   </a>
 </li>
+
+<li>
+  <a href="{{ base_url() }}log">
+    <i class="fa fa-address-book"></i> <span>Log</span>
+  </a>
+</li>

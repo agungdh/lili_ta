@@ -97,7 +97,7 @@ class Karyawan extends CI_Controller {
 			redirect(base_url('karyawan/ubah/' . $id));
 		}
 
-		Karyawan_model::where('id', $id)->update($requestData);
+		Karyawan_model::where('nik', $id)->update($requestData);
 		
 		$this->session->set_flashdata(
 			'alert',
@@ -114,7 +114,7 @@ class Karyawan extends CI_Controller {
 	public function aksihapus($id)
 	{
 		try {
-			Karyawan_model::where('id', $id)->delete();
+			Karyawan_model::where('nik', $id)->delete();
 		} catch (QueryException $exception) {
             $this->session->set_flashdata(
 			'alert',

@@ -37,11 +37,11 @@ Karyawan
                         <td>{{$item->jabatan}}</td>
                 		
                 		<td>
-                        <a class="btn btn-primary btn-sm" href="{{base_url()}}karyawan/ubah/{{$item->id}}">
+                        <a class="btn btn-primary btn-sm" href="{{base_url()}}karyawan/ubah/{{$item->nik}}">
     	                  <i class="glyphicon glyphicon-pencil"></i> Ubah
     	                </a>
 
-	              		<button type="button" class="btn btn-danger btn-sm" onclick="hapus('{{ $item->id }}')"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
+	              		<button type="button" class="btn btn-danger btn-sm" onclick="hapus('{{ $item->nik }}')"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
                 		</td>
                 	</tr>
                 	@endforeach

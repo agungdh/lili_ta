@@ -16,7 +16,7 @@ Karyawan
 				<h3 class="box-title">Ubah Karyawan</h3>
 			</div>
 
-			<form action="{{base_url()}}karyawan/aksiubah/{{$karyawan->id}}" method="post" role="form">
+			<form action="{{base_url()}}karyawan/aksiubah/{{$karyawan->nik}}" method="post" role="form">
 				@include('karyawan.form')
 
 				<div class="box-footer">

@@ -2,8 +2,8 @@
 --
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
--- Server version 	5.5.5-10.1.40-MariaDB-0ubuntu0.18.04.1
--- Date: Sat, 20 Jul 2019 11:45:59 +0700
+-- Server version 	5.5.5-10.3.13-MariaDB-2
+-- Date: Mon, 29 Jul 2019 23:51:46 +0700
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,60 +17,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `formula_tarif`
+-- Table structure for table `loket`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `formula_tarif` (
+CREATE TABLE `loket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tarif` int(11) NOT NULL,
+  `lokasi` varchar(191) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `formula_tarif`
+-- Dumping data for table `loket`
 --
 
-LOCK TABLES `formula_tarif` WRITE;
-/*!40000 ALTER TABLE `formula_tarif` DISABLE KEYS */;
+LOCK TABLES `loket` WRITE;
+/*!40000 ALTER TABLE `loket` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `formula_tarif` VALUES (1,70000),(2,30000),(3,55000),(4,65000),(5,25000),(7,95000);
-/*!40000 ALTER TABLE `formula_tarif` ENABLE KEYS */;
+INSERT INTO `loket` VALUES (1,'Loket Depan (2)'),(2,'Loket Depan (1)');
+/*!40000 ALTER TABLE `loket` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `formula_tarif` with 6 row(s)
---
-
---
--- Table structure for table `karyawan`
---
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `karyawan` (
-  `nik` varchar(191) NOT NULL,
-  `nama` varchar(191) NOT NULL,
-  `jabatan` varchar(191) NOT NULL,
-  PRIMARY KEY (`nik`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `karyawan`
---
-
-LOCK TABLES `karyawan` WRITE;
-/*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
-SET autocommit=0;
-INSERT INTO `karyawan` VALUES ('1234','Tukang nginput data','admin input'),('12345678','Boss','Boss'),('1432','gak tau apa','admin gak tau'),('masgas da','mboh opo iki','asfasf');
-/*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-
--- Dumped table `karyawan` with 4 row(s)
+-- Dumped table `loket` with 2 row(s)
 --
 
 --
@@ -141,6 +112,38 @@ COMMIT;
 --
 
 --
+-- Table structure for table `user`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nik` varchar(191) NOT NULL,
+  `password` varchar(191) NOT NULL,
+  `level` enum('b','o') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nik` (`nik`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `user` VALUES (5,'12345678','$2y$10$LhbGx3LCZ0dyy23VOGkOCeFf7C7mjDMku2rvILsKOntu/M.WkzOc6','b'),(6,'1432','$2y$10$LhbGx3LCZ0dyy23VOGkOCeFf7C7mjDMku2rvILsKOntu/M.WkzOc6','o');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `user` with 2 row(s)
+--
+
+--
 -- Table structure for table `log`
 --
 
@@ -176,61 +179,32 @@ COMMIT;
 --
 
 --
--- Table structure for table `loket`
+-- Table structure for table `karyawan`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `loket` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lokasi` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `loket`
---
-
-LOCK TABLES `loket` WRITE;
-/*!40000 ALTER TABLE `loket` DISABLE KEYS */;
-SET autocommit=0;
-INSERT INTO `loket` VALUES (1,'Loket Depan (2)'),(2,'Loket Depan (1)');
-/*!40000 ALTER TABLE `loket` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-
--- Dumped table `loket` with 2 row(s)
---
-
---
--- Table structure for table `pemilik_kendaraan`
---
-
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pemilik_kendaraan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `karyawan` (
+  `nik` varchar(191) NOT NULL,
   `nama` varchar(191) NOT NULL,
-  `nohp` varchar(191) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nohp` (`nohp`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `jabatan` varchar(191) NOT NULL,
+  PRIMARY KEY (`nik`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pemilik_kendaraan`
+-- Dumping data for table `karyawan`
 --
 
-LOCK TABLES `pemilik_kendaraan` WRITE;
-/*!40000 ALTER TABLE `pemilik_kendaraan` DISABLE KEYS */;
+LOCK TABLES `karyawan` WRITE;
+/*!40000 ALTER TABLE `karyawan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI','085368530235'),(2,'PT. PUTRA KARONA MANDIRI','3'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI','2'),(4,'TAXI PERORANGAN','4'),(5,'NON BUS PEDESAAN (KAT 2. CBG)','1');
-/*!40000 ALTER TABLE `pemilik_kendaraan` ENABLE KEYS */;
+INSERT INTO `karyawan` VALUES ('1234','Tukang nginput data','admin input'),('12345678','Boss','Boss'),('1432','gak tau apa','admin gak tau'),('masgas da','mboh opo iki','asfasf');
+/*!40000 ALTER TABLE `karyawan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `pemilik_kendaraan` with 5 row(s)
+-- Dumped table `karyawan` with 4 row(s)
 --
 
 --
@@ -275,35 +249,61 @@ COMMIT;
 --
 
 --
--- Table structure for table `user`
+-- Table structure for table `pemilik_kendaraan`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
+CREATE TABLE `pemilik_kendaraan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nik` varchar(191) NOT NULL,
-  `password` varchar(191) NOT NULL,
-  `level` enum('b','o') NOT NULL,
+  `nama` varchar(191) NOT NULL,
+  `nohp` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nik` (`nik`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `karyawan` (`nik`)
+  UNIQUE KEY `nohp` (`nohp`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `pemilik_kendaraan`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+LOCK TABLES `pemilik_kendaraan` WRITE;
+/*!40000 ALTER TABLE `pemilik_kendaraan` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `user` VALUES (5,'12345678','$2y$10$LhbGx3LCZ0dyy23VOGkOCeFf7C7mjDMku2rvILsKOntu/M.WkzOc6','b'),(6,'1432','$2y$10$lRLPraBg1QI2cjkNVlox6egBe7A9kb5/Eght0lWk7ZYEsyVMOqICK','o');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+INSERT INTO `pemilik_kendaraan` VALUES (1,'PT PUTRA KARO MANDIRI','085368530235'),(2,'PT. PUTRA KARONA MANDIRI','3'),(3,'PT KURNIAWAN SIDIQ TRANS EX PUTRI','2'),(4,'TAXI PERORANGAN','4'),(5,'NON BUS PEDESAAN (KAT 2. CBG)','1');
+/*!40000 ALTER TABLE `pemilik_kendaraan` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `user` with 2 row(s)
+-- Dumped table `pemilik_kendaraan` with 5 row(s)
+--
+
+--
+-- Table structure for table `formula_tarif`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `formula_tarif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tarif` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `formula_tarif`
+--
+
+LOCK TABLES `formula_tarif` WRITE;
+/*!40000 ALTER TABLE `formula_tarif` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `formula_tarif` VALUES (1,70000),(2,30000),(3,55000),(4,65000),(5,25000),(7,95000);
+/*!40000 ALTER TABLE `formula_tarif` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `formula_tarif` with 6 row(s)
 --
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -315,4 +315,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 20 Jul 2019 11:45:59 +0700
+-- Dump completed on: Mon, 29 Jul 2019 23:51:46 +0700

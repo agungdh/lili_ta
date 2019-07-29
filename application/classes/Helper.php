@@ -80,7 +80,7 @@ class Helper extends \agungdh\Pustaka
 			}
 
 			$i++;
-		} while ($bulanLoop != $kendaraan->mulai_penagihan_bulan || $tahunLoop != $kendaraan->mulai_penagihan_tahun);
+		} while ($bulanLoop != $kendaraan->mulai_penagihan_bulan && $tahunLoop != $kendaraan->mulai_penagihan_tahun);
 
 		return compact(['kendaraan', 'bulansForLooping', 'bulanTahunBelumBayar', 'bulanTahunSudahBayar']);
 	}
@@ -162,8 +162,8 @@ class Helper extends \agungdh\Pustaka
 			"driver"    => "mysql",
 			"host" => 'localhost',
 			"database" => 'lili_ta',
-			"username" => 'lili',
-			"password" => 'lili',
+			"username" => 'agungdh',
+			"password" => 'agungdh',
 		]);
 
 		$db->setAsGlobal();

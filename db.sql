@@ -3,7 +3,7 @@
 -- Host: localhost	Database: lili_ta
 -- ------------------------------------------------------
 -- Server version 	5.5.5-10.3.13-MariaDB-2
--- Date: Mon, 29 Jul 2019 23:51:46 +0700
+-- Date: Wed, 07 Aug 2019 13:47:12 +0700
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -286,9 +286,11 @@ COMMIT;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `formula_tarif` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jenis_angkutan` varchar(191) NOT NULL,
+  `jumlah_seat_sampai_dengan` int(11) NOT NULL,
   `tarif` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +300,7 @@ CREATE TABLE `formula_tarif` (
 LOCK TABLES `formula_tarif` WRITE;
 /*!40000 ALTER TABLE `formula_tarif` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `formula_tarif` VALUES (1,70000),(2,30000),(3,55000),(4,65000),(5,25000),(7,95000);
+INSERT INTO `formula_tarif` VALUES (1,'Non Bus (Travel)',12,30000),(2,'Bus AKAP',28,55000),(3,'Bus AKAP',54,65000),(4,'Non Bus (Angdes)',10,25000),(5,'Non Bus (Angdes)',12,30000),(7,'Bus (AKDP)',18,55000);
 /*!40000 ALTER TABLE `formula_tarif` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -315,4 +317,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Mon, 29 Jul 2019 23:51:46 +0700
+-- Dump completed on: Wed, 07 Aug 2019 13:47:12 +0700

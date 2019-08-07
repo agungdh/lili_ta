@@ -14,6 +14,13 @@ class Formulatarif extends CI_Controller {
 		helper()->auth(['o']);
 	}
 
+	public function getJenisAngkutan($phrase)
+	{
+		$datas = DB::select("SELECT DISTINCT(jenis_angkutan) name FROM formula_tarif WHERE jenis_angkutan like ?", ["%" . $phrase . "%"]);
+		echo json_encode($datas);
+	}
+
+
 	public function index()
 	{
 		$formulatarifs = FormulaTarif_model::all();
@@ -32,13 +39,9 @@ class Formulatarif extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'tarif' => 'required',
+			'jenis_angkutan' => 'required',
+			'jumlah_seat_sampai_dengan' => 'required',
 		]);
-
-		$tarifValidate = str_replace('.', '', $requestData['tarif']);
-		if (FormulaTarif_model::where(['tarif' => $tarifValidate])->first()) {
-			$validator->errors()->add('tarif', 'Formula Tarif sudah ada !!!');
-		}
-
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -48,6 +51,7 @@ class Formulatarif extends CI_Controller {
 		}
 
 		$requestData['tarif'] = str_replace('.', '', $requestData['tarif']);
+		$requestData['jumlah_seat_sampai_dengan'] = str_replace('.', '', $requestData['jumlah_seat_sampai_dengan']);
 
 		FormulaTarif_model::insert($requestData);
 		
@@ -78,12 +82,9 @@ class Formulatarif extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'tarif' => 'required',
+			'jenis_angkutan' => 'required',
+			'jumlah_seat_sampai_dengan' => 'required',
 		]);
-
-		$tarifValidate = str_replace('.', '', $requestData['tarif']);
-		if ($tarifValidate != $formulaTarif->tarif && FormulaTarif_model::where(['tarif' => $tarifValidate])->first()) {
-			$validator->errors()->add('tarif', 'Formula Tarif sudah ada !!!');
-		}
 
 		if (count($validator->errors()) > 0) {
 			$this->session->set_flashdata('errors', $validator->errors());
@@ -93,6 +94,7 @@ class Formulatarif extends CI_Controller {
 		}
 
 		$requestData['tarif'] = str_replace('.', '', $requestData['tarif']);
+		$requestData['jumlah_seat_sampai_dengan'] = str_replace('.', '', $requestData['jumlah_seat_sampai_dengan']);
 
 		FormulaTarif_model::where('id', $id)->update($requestData);
 		

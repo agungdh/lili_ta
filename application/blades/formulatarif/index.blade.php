@@ -23,6 +23,8 @@ Formula Tarif
               <table class="table table-bordered table-hover datatable" style="width: 100%">
                 <thead>
 	                <tr>
+                      <th>Jenis Angkutan</th>
+                      <th>Jumlah Seat Sampai Dengan</th>
                       <th>Tarif</th>
 	                  <th>Proses</th>
 	                </tr>
@@ -30,6 +32,8 @@ Formula Tarif
                 <tbody>
                 	@foreach($formulatarifs as $item)
                 	<tr>
+                    <td>{{$item->jenis_angkutan}}</td>
+                    <td>{{helper()->rupiah($item->jumlah_seat_sampai_dengan, false, false)}}</td>
                     <td>{{helper()->rupiah($item->tarif)}}</td>
                 		
                 		<td>

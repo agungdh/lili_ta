@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>No Polisi</th>
+      <th>Jenis Angkutan</th>
       <th>Pemilik Kendaraan</th>
       <th>Tarif</th>
       <th>Seat</th>
@@ -12,6 +13,7 @@
   	@foreach($kendaraans as $item)
   	<tr>
   		<td>{{$item->nomor_polisi}}</td>
+      <td>{{$item->formulaTarif->jenis_angkutan}}</td>
       <td>{{$item->pemilikKendaraan->nama}}</td>
       <td>{{helper()->rupiah($item->formulaTarif->tarif)}}</td>
       <td>{{$item->seat_aktif}}/{{$item->jumlah_seat}}</td>

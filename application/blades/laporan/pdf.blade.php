@@ -11,6 +11,7 @@
 		<tr>
 			<th>NO</th>
 			<th>Nomor Polisi</th>
+			<th>Jenis Angkutan</th>
 			<th>Pemilik Kendaraan</th>
 			<th>Formula Tarif</th>
 			<th>Seat</th>
@@ -29,6 +30,7 @@
 		<tr>
 			<td>{{$i++}}</td>
 			<td>{{$item->kendaraan->nomor_polisi}}</td>
+		      <td>{{$item->kendaraan->formulaTarif->jenis_angkutan}}</td>
 		      <td>{{$item->kendaraan->pemilikKendaraan->nama}}</td>
 		      <td>{{helper()->rupiah($item->kendaraan->formulaTarif->tarif)}}</td>
 		      <td>{{$item->kendaraan->seat_aktif}}/{{$item->kendaraan->jumlah_seat}}</td>

@@ -56,7 +56,7 @@ $config = helper()->getKonfigurasi();
 			<select class="form-control select2" name="id_formula_tarif">
 				<option {{$value == '' ? 'selected' : null}} value="">Pilih Formula Tarif</option>
 				@foreach($formulaTarifs as $item)
-				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{helper()->rupiah($item->tarif)}}</option>
+				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->jenis_angkutan}} - {{helper()->rupiah($item->tarif)}}</option>
 				@endforeach
 			</select>
 		</div>

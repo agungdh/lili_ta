@@ -33,9 +33,9 @@ class Transaksi extends CI_Controller {
 				$kendaraanIDArrays[] = $item->id;
 			}
 
-			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->whereIn('id_kendaraan', $kendaraanIDArrays)->where('nik', getUserData()->nik)->get();
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->whereIn('id_kendaraan', $kendaraanIDArrays)->get();
 		} else {
-			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->where('nik', getUserData()->nik)->get();
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->get();
 		}
 
 		return blade('transaksi.ajaxtable', compact(['transaksis']));

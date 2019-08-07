@@ -10,7 +10,9 @@
       <th>Loket</th>
       <th>Outstanding</th>
       <th>Potensi</th>
+      @if(getUserData()->level == 'o')
       <th>Proses</th>
+      @endif
     </tr>
   </thead>
   <tbody>
@@ -26,6 +28,7 @@
       <td>{{helper()->rupiah($item->outstanding)}}</td>
       <td>{{helper()->rupiah($item->potensi)}}</td>
       
+      @if(getUserData()->level == 'o')
       <td>
         <a class="btn btn-primary btn-sm" href="{{base_url()}}transaksi/ubah/{{$item->id}}">
           <i class="glyphicon glyphicon-pencil"></i> Ubah
@@ -33,6 +36,7 @@
 
         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('{{ $item->id }}')"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
       </td>
+      @endif
     </tr>
     @endforeach
   </tbody>

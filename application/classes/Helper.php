@@ -237,11 +237,13 @@ class Helper extends \agungdh\Pustaka
 		$jumlahBelumBayar = [];
 		$jumlahBelumBayar['total'] = 0;
 		$jumlahBelumBayar['jumlah'] = 0;
+		$jumlahBelumBayar['biaya'] = 0;
 		$jumlahBelumBayar['kendaraan'] = [];
 		foreach (PemilikKendaraan_model::all() as $pemilikKendaraan) {
 			$belumBayar = self::jumlahBelumBayar($pemilikKendaraan->id);
 			$jumlahBelumBayar['total'] += $belumBayar['total'];
 			$jumlahBelumBayar['jumlah'] += $belumBayar['jumlah'];
+			$jumlahBelumBayar['biaya'] += $belumBayar['biaya'];
 			
 			foreach ($belumBayar['kendaraan'] as $kendaraan) {
 				array_push($jumlahBelumBayar['kendaraan'], $kendaraan);

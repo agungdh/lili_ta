@@ -17,9 +17,11 @@ Transaksi
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              @if(getUserData()->level == 'o')
                 <a class="btn btn-success btn-sm" href="{{base_url()}}transaksi/tambah">
                   <i class="glyphicon glyphicon-plus"></i> Tambah
                 </a><br><br>
+              @endif
 
                 <div class="form-group has-feedback">
                     <select class="select2" id="pemilikkendaraan">

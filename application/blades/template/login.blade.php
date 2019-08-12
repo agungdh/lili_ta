@@ -11,7 +11,7 @@ $config = helper()->getKonfigurasi();
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link id="favicon" rel="icon" type="image/x-icon" href="{{base_url()}}assets/favicon/favicon.ico">
+  <link id="favicon" rel="icon" type="image/x-icon" href="{{base_url()}}assets/fav.png">
   
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{base_url()}}assets/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -33,14 +33,26 @@ $config = helper()->getKonfigurasi();
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style type="text/css">
+    .login-page {
+      background: url("{{base_url()}}assets/jr1.jpg") no-repeat center center fixed; 
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+    }
+  </style>
+
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{base_url()}}"><b>{{$config['APP_TITLE_SHORT']}}</b></a>
-  </div>
+<div class="login-box" style="opacity: 0.8;">
   <!-- /.login-logo -->
   <div class="login-box-body">
+    <div class="login-logo">
+      <a href="{{base_url()}}"><b>{{$config['APP_TITLE_SHORT']}}</b></a>
+    </div>
+
     <p class="login-box-msg">{{$config['APP_TITLE']}}</p>
 
     <form action="{{base_url()}}log/in" method="post">

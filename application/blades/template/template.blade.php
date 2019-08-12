@@ -15,7 +15,7 @@ if(ci()->session->login) {
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link id="favicon" rel="icon" type="image/x-icon" href="{{base_url()}}assets/favicon/favicon.ico">
+  <link id="favicon" rel="icon" type="image/x-icon" href="{{base_url()}}assets/fav.png">
 
   <link rel="stylesheet" href="{{base_url()}}assets/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -133,13 +133,13 @@ if(ci()->session->login) {
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{base_url()}}assets/favicon/favicon.png" class="user-image" alt="User Image">
+              <img src="{{base_url()}}assets/fav.png" class="user-image" alt="User Image">
               <span class="hidden-xs">{{$userData->karyawan->nama}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{base_url()}}assets/favicon/favicon.png" class="img-circle" alt="User Image">
+                <img src="{{base_url()}}assets/jrlgo.png" class="img-circle" alt="User Image">
 
                 <p>
                     {{$userData->karyawan->nama}}

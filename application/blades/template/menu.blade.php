@@ -1,11 +1,5 @@
 @if(getUserData()->level == 'o')
 <li>
-  <a href="{{ base_url() }}loket">
-    <i class="fa fa-address-book"></i> <span>Loket</span>
-  </a>
-</li>
-
-<li>
   <a href="{{ base_url() }}pemilikkendaraan">
     <i class="fa fa-address-book"></i> <span>Pemilik Kendaaan</span>
   </a>

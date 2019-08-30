@@ -30,35 +30,6 @@
 	</div>
 
 	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('id_loket')) {
-		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('id_loket');
-	} else {
-		$class = 'form-group has-feedback';
-		$message = '';
-	}
-
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['id_loket']) {
-		$value = ci()->session->flashdata('old')['id_loket'];
-	} elseif (isset($transaksi) && $transaksi['id_loket']) {
-		$value = $transaksi['id_loket'];
-	} else {
-		$value = '';
-	}
-	@endphp
-	<div class="{{$class}}">
-		<label for="id_loket" data-toggle="tooltip" title="{{$message}}">Loket</label>
-		<div data-toggle="tooltip" title="{{$message}}">
-			<select class="form-control select2" name="id_loket">
-				<option {{$value == '' ? 'selected' : null}} value="">Pilih Loket</option>
-				@foreach($lokets as $item)
-				<option {{$value == $item->id ? 'selected' : null}} value="{{$item->id}}">{{$item->lokasi}}</option>
-				@endforeach
-			</select>
-		</div>
-	</div>
-
-	@php
 	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('tanggal')) {
 		$class = 'form-group has-feedback has-error';
 		$message = ci()->session->flashdata('errors')->first('tanggal');
@@ -134,53 +105,4 @@
 			<input type="text" name="tahun" class="form-control" placeholder="Isi Tahun" id="tahun" value="{{$value}}">
 		</div>
 	</div>
-
-	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('outstanding')) {
-		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('outstanding');
-	} else {
-		$class = 'form-group has-feedback';
-		$message = '';
-	}
-
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['outstanding']) {
-		$value = ci()->session->flashdata('old')['outstanding'];
-	} elseif (isset($transaksi) && $transaksi['outstanding']) {
-		$value = $transaksi['outstanding'];
-	} else {
-		$value = '';
-	}
-	@endphp
-	<div class="{{$class}}">
-		<label for="outstanding" data-toggle="tooltip" title="{{$message}}">Outstanding</label>
-		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="outstanding" class="form-control mask_ribuan" placeholder="Isi Outstanding" id="outstanding" value="{{$value}}">
-		</div>
-	</div>
-	
-	@php
-	if (ci()->session->flashdata('errors') && ci()->session->flashdata('errors')->has('potensi')) {
-		$class = 'form-group has-feedback has-error';
-		$message = ci()->session->flashdata('errors')->first('potensi');
-	} else {
-		$class = 'form-group has-feedback';
-		$message = '';
-	}
-
-	if (ci()->session->flashdata('old') && ci()->session->flashdata('old')['potensi']) {
-		$value = ci()->session->flashdata('old')['potensi'];
-	} elseif (isset($transaksi) && $transaksi['potensi']) {
-		$value = $transaksi['potensi'];
-	} else {
-		$value = '';
-	}
-	@endphp
-	<div class="{{$class}}">
-		<label for="potensi" data-toggle="tooltip" title="{{$message}}">Potensi</label>
-		<div data-toggle="tooltip" title="{{$message}}">
-			<input type="text" name="potensi" class="form-control mask_ribuan" placeholder="Isi Potensi" id="potensi" value="{{$value}}">
-		</div>
-	</div>
-	
 </div>

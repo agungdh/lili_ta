@@ -33,9 +33,9 @@ class Transaksi extends CI_Controller {
 				$kendaraanIDArrays[] = $item->id;
 			}
 
-			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->whereIn('id_kendaraan', $kendaraanIDArrays)->get();
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan')->whereIn('id_kendaraan', $kendaraanIDArrays)->get();
 		} else {
-			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan', 'loket')->get();
+			$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'kendaraan.formulaTarif', 'karyawan')->get();
 		}
 
 		return blade('transaksi.ajaxtable', compact(['transaksis']));
@@ -50,10 +50,9 @@ class Transaksi extends CI_Controller {
 
 	public function tambah()
 	{
-		$lokets = Loket_model::all();
 		$kendaraans = Kendaraan_model::with('pemilikKendaraan')->get();
 
-		return blade('transaksi.tambah', compact(['lokets', 'kendaraans']));
+		return blade('transaksi.tambah', compact(['kendaraans']));
 	}
 
 	public function aksitambah()
@@ -62,12 +61,9 @@ class Transaksi extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'id_kendaraan' => 'required',
-			'id_loket' => 'required',
 			'tanggal' => 'required',
 			'bulan' => 'required|numeric|min:1|max:12',
 			'tahun' => 'required|numeric|min:1900|max:2900',
-			'outstanding' => 'required|numeric|min:0',
-			'potensi' => 'required|numeric|min:0',
 		]);
 
 		if (Transaksi_model::where(['id_kendaraan' => $requestData['id_kendaraan'], 'bulan' => $requestData['bulan'], 'tahun' => $requestData['tahun']])->first()) {
@@ -84,8 +80,6 @@ class Transaksi extends CI_Controller {
 		}
 
 		$requestData['nik'] = getUserData()->nik;
-		$requestData['outstanding'] = str_replace('.', '', $requestData['outstanding']);
-		$requestData['potensi'] = str_replace('.', '', $requestData['potensi']);
 		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
 
 		Transaksi_model::insert($requestData);
@@ -107,10 +101,9 @@ class Transaksi extends CI_Controller {
 		$transaksi = Transaksi_model::find($id);
 		$transaksi->tanggal = helper()->tanggalIndo($transaksi->tanggal);
 
-		$lokets = Loket_model::all();
 		$kendaraans = Kendaraan_model::with('pemilikKendaraan')->get();
 
-		return blade('transaksi.ubah', compact(['transaksi', 'lokets', 'kendaraans']));
+		return blade('transaksi.ubah', compact(['transaksi', 'kendaraans']));
 	}
 
 	public function aksiubah($id)
@@ -121,12 +114,9 @@ class Transaksi extends CI_Controller {
 		
 		$validator = validator()->make($requestData, [
 			'id_kendaraan' => 'required',
-			'id_loket' => 'required',
 			'tanggal' => 'required',
 			'bulan' => 'required|numeric|min:1|max:12',
 			'tahun' => 'required|numeric|min:1900|max:2900',
-			'outstanding' => 'required|numeric|min:0',
-			'potensi' => 'required|numeric|min:0',
 		]);
 
 		if (($requestData['id_kendaraan'] != $transaksi->id_kendaraan || $requestData['bulan'] != $transaksi->bulan || $requestData['tahun'] != $transaksi->tahun) && Transaksi_model::where(['id_kendaraan' => $requestData['id_kendaraan'], 'bulan' => $requestData['bulan'], 'tahun' => $requestData['tahun']])->first()) {
@@ -143,8 +133,6 @@ class Transaksi extends CI_Controller {
 		}
 
 		$requestData['nik'] = getUserData()->nik;
-		$requestData['outstanding'] = str_replace('.', '', $requestData['outstanding']);
-		$requestData['potensi'] = str_replace('.', '', $requestData['potensi']);
 		$requestData['tanggal'] = helper()->parseTanggalIndo($requestData['tanggal']);
 
 		Transaksi_model::where('id', $id)->update($requestData);

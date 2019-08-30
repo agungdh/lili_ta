@@ -7,9 +7,6 @@
       <th>Seat</th>
       <th>Tanggal</th>
       <th>Bulan/Tahun</th>
-      <th>Loket</th>
-      <th>Outstanding</th>
-      <th>Potensi</th>
       @if(getUserData()->level == 'o')
       <th>Proses</th>
       @endif
@@ -24,9 +21,6 @@
       <td>{{$item->kendaraan->seat_aktif}}/{{$item->kendaraan->jumlah_seat}}</td>
       <td>{{helper()->tanggalIndo($item->tanggal)}}</td>
       <td>{{$item->bulan}}/{{$item->tahun}}</td>
-      <td>{{$item->loket->lokasi}}</td>
-      <td>{{helper()->rupiah($item->outstanding)}}</td>
-      <td>{{helper()->rupiah($item->potensi)}}</td>
       
       @if(getUserData()->level == 'o')
       <td>

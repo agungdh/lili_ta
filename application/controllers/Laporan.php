@@ -21,7 +21,7 @@ class Laporan extends CI_Controller {
 
 	public function cetak($bulan, $tahun)
 	{
-		$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'loket', 'karyawan')->whereRaw('month(tanggal) = ? AND year (tanggal) = ?', [$bulan, $tahun])->get();
+		$transaksis = Transaksi_model::with('kendaraan.pemilikKendaraan', 'karyawan')->whereRaw('month(tanggal) = ? AND year (tanggal) = ?', [$bulan, $tahun])->get();
 	
 		$dompdf = new Dompdf\Dompdf();
 		$dompdf->set_option('defaultFont', 'Courier');
